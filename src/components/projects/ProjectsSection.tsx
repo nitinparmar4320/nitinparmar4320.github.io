@@ -4,7 +4,7 @@ import { ProjectCardWide } from './ProjectCardWide';
 import { ProjectCardSplit } from './ProjectCardSplit';
 import { ProjectCardSensor } from './ProjectCardSensor';
 import { ProjectCardMpos } from './ProjectCardMpos';
-import { projectsData } from '../../data/projects';
+import { projectsData } from '@/data/projects';
 import { Layers } from 'lucide-react';
 
 export const ProjectsSection: React.FC = () => {
@@ -22,9 +22,9 @@ export const ProjectsSection: React.FC = () => {
           title="Engineered systems built for scale and practical utility."
           subtitle="A curated selection of real-world web applications spanning multi-service platforms, headless content ecosystems, real-time telemetry streaming, and administrative operations."
           extraContent={
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-              <span className="mono-label">
-                <Layers size={13} color="var(--accent-vermilion)" />
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="mono-label text-xs">
+                <Layers size={13} className="text-[var(--accent-vermilion)]" />
                 4 PRODUCTION CASE STUDIES
               </span>
             </div>

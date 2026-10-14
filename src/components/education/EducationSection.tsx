@@ -1,5 +1,5 @@
 import React from 'react';
-import { educationData } from '../../data/education';
+import { educationData } from '@/data/education';
 import { GraduationCap, Award, Calendar } from 'lucide-react';
 
 export const EducationSection: React.FC = () => {
@@ -7,152 +7,59 @@ export const EducationSection: React.FC = () => {
     <section id="education" className="section-spacing" aria-label="Academic Background">
       <div className="container">
         {/* Compact Editorial Header */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderBottom: '1px solid var(--border-medium)',
-            paddingBottom: '0.75rem',
-            marginBottom: 'var(--space-xl)'
-          }}
-        >
+        <div className="flex items-center justify-between border-b border-[var(--border-medium)] pb-3 mb-8">
           <span className="mono-label">
-            <span style={{ color: 'var(--accent-vermilion)' }}>[05]</span> // ACADEMIC FOUNDATION
+            <span className="text-[var(--accent-vermilion)]">[05]</span> // ACADEMIC FOUNDATION
           </span>
           <span className="mono-label">ACCREDITED DEGREE</span>
         </div>
 
         {/* Compact Balanced Card */}
-        <div
-          style={{
-            backgroundColor: '#FFFFFF',
-            border: '1px solid var(--border-medium)',
-            borderRadius: '6px',
-            padding: '2rem 2.25rem',
-            boxShadow: 'var(--shadow-subtle)',
-            display: 'grid',
-            gridTemplateColumns: 'minmax(280px, 1.4fr) minmax(200px, 0.8fr)',
-            gap: '2rem',
-            alignItems: 'center'
-          }}
-          className="education-grid"
-        >
+        <div className="bg-white border border-[var(--border-medium)] rounded-md p-6 sm:p-8 shadow-[var(--shadow-subtle)] grid grid-cols-1 md:grid-cols-[minmax(280px,1.4fr)_minmax(200px,0.8fr)] gap-8 items-center">
           <div>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.72rem',
-                color: 'var(--accent-blue)',
-                backgroundColor: 'rgba(82, 103, 216, 0.08)',
-                padding: '0.2rem 0.6rem',
-                borderRadius: '4px',
-                border: '1px solid rgba(82, 103, 216, 0.2)',
-                marginBottom: '0.75rem'
-              }}
-            >
+            <div className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--accent-blue)] bg-blue-600/10 px-2.5 py-1 rounded border border-blue-600/20 mb-3">
               <GraduationCap size={13} />
               <span>UNDERGRADUATE DEGREE</span>
             </div>
 
-            <h3
-              style={{
-                fontSize: 'clamp(1.25rem, 1.7vw, 1.6rem)',
-                color: 'var(--text-primary)',
-                marginBottom: '0.5rem'
-              }}
-            >
+            <h3 className="text-xl sm:text-2xl font-medium text-[var(--text-primary)] mb-2">
               {educationData.degree}
             </h3>
 
-            <div
-              style={{
-                fontSize: '1rem',
-                color: 'var(--text-secondary)',
-                fontWeight: 600,
-                marginBottom: '0.75rem'
-              }}
-            >
+            <div className="text-base font-semibold text-[var(--text-secondary)] mb-3">
               {educationData.institution}
             </div>
 
-            <p style={{ fontSize: '0.86rem', lineHeight: 1.55, color: 'var(--text-tertiary)' }}>
+            <p className="text-sm leading-relaxed text-[var(--text-tertiary)]">
               {educationData.credentialNote}
             </p>
           </div>
 
           {/* Academic Metric Box */}
-          <div
-            style={{
-              backgroundColor: 'var(--bg-subtle)',
-              border: '1px solid var(--border-medium)',
-              borderRadius: '6px',
-              padding: '1.5rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem'
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <span className="mono-label" style={{ fontSize: '0.7rem' }}>
+          <div className="bg-[var(--bg-subtle)] border border-[var(--border-medium)] rounded-md p-5 sm:p-6 flex flex-col gap-4">
+            <div className="flex items-center justify-between">
+              <span className="mono-label text-xs">
                 CUMULATIVE GPA
               </span>
-              <Award size={16} color="var(--accent-vermilion)" />
+              <Award size={16} className="text-[var(--accent-vermilion)]" />
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.35rem' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '2.5rem',
-                  fontWeight: 700,
-                  color: 'var(--accent-vermilion)',
-                  lineHeight: 1
-                }}
-              >
+            <div className="flex items-baseline gap-1.5">
+              <span className="font-display text-4xl sm:text-5xl font-bold text-[var(--accent-vermilion)] leading-none">
                 {educationData.cgpa}
               </span>
-              <span
-                style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '1rem',
-                  color: 'var(--text-tertiary)'
-                }}
-              >
+              <span className="font-mono text-base text-[var(--text-tertiary)]">
                 / {educationData.scale}
               </span>
             </div>
 
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                borderTop: '1px dashed var(--border-medium)',
-                paddingTop: '0.75rem',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.75rem',
-                color: 'var(--text-secondary)'
-              }}
-            >
-              <Calendar size={13} color="var(--accent-blue)" />
+            <div className="flex items-center gap-2 border-t border-dashed border-[var(--border-medium)] pt-3 font-mono text-xs text-[var(--text-secondary)]">
+              <Calendar size={13} className="text-[var(--accent-blue)]" />
               <span>{educationData.period}</span>
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .education-grid {
-            grid-template-columns: 1fr !important;
-            gap: 1.25rem !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };

@@ -1,5 +1,7 @@
+'use client';
+
 import React, { useState } from 'react';
-import { architectureLayers } from '../../data/architecture';
+import { architectureLayers } from '@/data/architecture';
 import { Layers, Terminal, ArrowRight, Cpu, Database, Radio, Server } from 'lucide-react';
 
 export const SystemArchitectureVisualizer: React.FC = () => {
@@ -26,157 +28,74 @@ export const SystemArchitectureVisualizer: React.FC = () => {
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: '#FFFFFF',
-        border: '1px solid var(--border-medium)',
-        borderRadius: '6px',
-        padding: '1.5rem',
-        boxShadow: 'var(--shadow-card)',
-        position: 'relative',
-        overflow: 'hidden'
-      }}
-      className="architecture-panel"
-    >
+    <div className="bg-white border border-[var(--border-medium)] rounded-md p-6 shadow-[var(--shadow-card)] relative overflow-hidden">
       {/* Top Spec Bar */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          borderBottom: '1px solid var(--border-light)',
-          paddingBottom: '0.85rem',
-          marginBottom: '1.25rem'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          <span
-            style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--accent-vermilion)'
-            }}
-          />
-          <span className="mono-label" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+      <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-3.5 mb-5">
+        <div className="flex items-center gap-2.5">
+          <span className="w-2 h-2 rounded-full bg-[var(--accent-vermilion)] animate-pulse" />
+          <span className="mono-label text-[var(--text-primary)] font-semibold text-xs tracking-wider">
             SYSTEM TOPOLOGY // FULL STACK CONTRACT
           </span>
         </div>
-        <span
-          className="mono-label"
-          style={{
-            fontSize: '0.7rem',
-            padding: '0.15rem 0.45rem',
-            backgroundColor: 'var(--bg-subtle)',
-            border: '1px solid var(--border-light)',
-            borderRadius: '3px'
-          }}
-        >
+        <span className="mono-label text-[0.7rem] px-2 py-0.5 bg-[var(--bg-subtle)] border border-[var(--border-light)] rounded">
           INTERACTIVE ARCHITECTURE
         </span>
       </div>
 
       {/* Visual Pipeline Flow Header */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: '1.5rem',
-          padding: '0.75rem 1rem',
-          backgroundColor: 'var(--bg-subtle)',
-          borderRadius: '4px',
-          border: '1px solid var(--border-light)',
-          overflowX: 'auto'
-        }}
-        className="pipeline-strip"
-      >
-        <span className="mono-label" style={{ color: 'var(--accent-vermilion)' }}>
-          UI
-        </span>
-        <ArrowRight size={13} color="var(--border-strong)" />
-        <span className="mono-label" style={{ color: 'var(--accent-blue)' }}>
-          API GATEWAY
-        </span>
-        <ArrowRight size={13} color="var(--border-strong)" />
-        <span className="mono-label" style={{ color: 'var(--text-primary)' }}>
-          SERVICES
-        </span>
-        <ArrowRight size={13} color="var(--border-strong)" />
-        <span className="mono-label" style={{ color: 'var(--accent-amber)' }}>
-          DATA ACID
-        </span>
-        <ArrowRight size={13} color="var(--border-strong)" />
-        <span className="mono-label" style={{ color: 'var(--accent-green)' }}>
-          TELEMETRY
-        </span>
+      <div className="flex items-center justify-between mb-6 px-4 py-3 bg-[var(--bg-subtle)] rounded border border-[var(--border-light)] overflow-x-auto gap-2">
+        <span className="mono-label text-[var(--accent-vermilion)] font-semibold">UI</span>
+        <ArrowRight size={13} className="text-[var(--border-strong)] shrink-0" />
+        <span className="mono-label text-[var(--accent-blue)] font-semibold">API GATEWAY</span>
+        <ArrowRight size={13} className="text-[var(--border-strong)] shrink-0" />
+        <span className="mono-label text-[var(--text-primary)] font-semibold">SERVICES</span>
+        <ArrowRight size={13} className="text-[var(--border-strong)] shrink-0" />
+        <span className="mono-label text-[var(--accent-amber)] font-semibold">DATA ACID</span>
+        <ArrowRight size={13} className="text-[var(--border-strong)] shrink-0" />
+        <span className="mono-label text-[var(--accent-green)] font-semibold">TELEMETRY</span>
       </div>
 
       {/* Interactive Layer Nodes */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+      <div className="flex flex-col gap-2.5">
         {architectureLayers.map((layer, index) => {
           const isSelected = layer.id === selectedLayerId;
           return (
             <button
               key={layer.id}
               onClick={() => setSelectedLayerId(layer.id)}
-              style={{
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '0.75rem 1rem',
-                borderRadius: '4px',
-                border: isSelected ? '1px solid var(--accent-vermilion)' : '1px solid var(--border-light)',
-                backgroundColor: isSelected ? 'var(--bg-subtle)' : '#FFFFFF',
-                cursor: 'pointer',
-                textAlign: 'left',
-                transition: 'all var(--transition-fast)',
-                position: 'relative'
-              }}
-              className="layer-row-button"
+              className={`w-full flex items-center justify-between p-3.5 rounded border transition-all text-left cursor-pointer ${
+                isSelected
+                  ? 'border-[var(--accent-vermilion)] bg-[var(--bg-subtle)] shadow-xs'
+                  : 'border-[var(--border-light)] bg-white hover:border-[var(--border-strong)] hover:bg-[#FAF9F5]'
+              }`}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+              <div className="flex items-center gap-3.5">
                 <span
-                  style={{
-                    color: isSelected ? 'var(--accent-vermilion)' : 'var(--text-tertiary)',
-                    display: 'flex'
-                  }}
+                  className={isSelected ? 'text-[var(--accent-vermilion)]' : 'text-[var(--text-tertiary)]'}
                 >
                   {getLayerIcon(layer.id)}
                 </span>
                 <div>
                   <div
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontWeight: 600,
-                      fontSize: '0.88rem',
-                      color: isSelected ? 'var(--accent-vermilion)' : 'var(--text-primary)'
-                    }}
+                    className={`font-sans font-semibold text-sm ${
+                      isSelected ? 'text-[var(--accent-vermilion)]' : 'text-[var(--text-primary)]'
+                    }`}
                   >
                     {layer.label}
                   </div>
-                  <div
-                    style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.72rem',
-                      color: 'var(--text-tertiary)'
-                    }}
-                  >
+                  <div className="font-mono text-xs text-[var(--text-tertiary)] mt-0.5">
                     {layer.tech.slice(0, 3).join(' • ')}
                   </div>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <div className="flex items-center gap-2">
                 <span
-                  className="mono-tag"
-                  style={{
-                    fontSize: '0.68rem',
-                    backgroundColor: isSelected ? 'rgba(229, 83, 61, 0.1)' : 'transparent',
-                    borderColor: isSelected ? 'var(--accent-vermilion)' : 'var(--border-light)',
-                    color: isSelected ? 'var(--accent-vermilion)' : 'var(--text-tertiary)'
-                  }}
+                  className={`mono-tag text-xs font-mono px-2 py-0.5 rounded ${
+                    isSelected
+                      ? 'bg-[rgba(229,83,61,0.1)] border-[var(--accent-vermilion)] text-[var(--accent-vermilion)]'
+                      : 'border-[var(--border-light)] text-[var(--text-tertiary)]'
+                  }`}
                 >
                   0{index + 1}
                 </span>
@@ -187,88 +106,33 @@ export const SystemArchitectureVisualizer: React.FC = () => {
       </div>
 
       {/* Selected Layer Technical Inspector */}
-      <div
-        style={{
-          marginTop: '1.25rem',
-          padding: '1.15rem',
-          borderRadius: '4px',
-          backgroundColor: '#20211F',
-          color: '#F8F7F2',
-          border: '1px solid #333531'
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '0.65rem'
-          }}
-        >
-          <span
-            className="mono-label"
-            style={{ color: '#E5533D', fontSize: '0.7rem', letterSpacing: '0.08em' }}
-          >
+      <div className="mt-5 p-4 rounded bg-[#20211F] text-[#F8F7F2] border border-[#333531] shadow-inner">
+        <div className="flex items-center justify-between mb-2.5">
+          <span className="font-mono text-[#E5533D] text-xs font-medium tracking-wider">
             LAYER INSPECTION // {selectedLayer.id.toUpperCase()}
           </span>
-          <span
-            className="mono-label"
-            style={{ color: '#8E9187', fontSize: '0.68rem' }}
-          >
+          <span className="font-mono text-[#8E9187] text-[0.68rem]">
             ACTIVE CONTRACT
           </span>
         </div>
 
-        <p
-          style={{
-            fontSize: '0.86rem',
-            lineHeight: 1.55,
-            color: '#DEDED6',
-            marginBottom: '0.85rem'
-          }}
-        >
+        <p className="text-sm leading-relaxed text-[#DEDED6] mb-3.5">
           {selectedLayer.description}
         </p>
 
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '0.35rem',
-            marginBottom: '0.85rem'
-          }}
-        >
+        <div className="flex flex-wrap gap-1.5 mb-3.5">
           {selectedLayer.tech.map((t) => (
             <span
               key={t}
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.68rem',
-                padding: '0.18rem 0.5rem',
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                color: '#FAF4EE',
-                borderRadius: '3px',
-                border: '1px solid rgba(255, 255, 255, 0.12)'
-              }}
+              className="font-mono text-[0.7rem] px-2 py-0.5 bg-white/10 text-[#FAF4EE] rounded border border-white/15"
             >
               {t}
             </span>
           ))}
         </div>
 
-        <div
-          style={{
-            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-            paddingTop: '0.65rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.72rem',
-            color: '#A2A59B'
-          }}
-        >
-          <span style={{ color: 'var(--accent-blue)' }}>↳ Flow:</span>
+        <div className="border-t border-white/10 pt-2.5 flex items-center gap-2 font-mono text-xs text-[#A2A59B]">
+          <span className="text-[#5267D8] font-semibold">↳ Flow:</span>
           <span>{selectedLayer.dataFlow}</span>
         </div>
       </div>

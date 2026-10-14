@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { Monogram } from './Monogram';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
@@ -30,55 +32,25 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     <>
       <header
         role="banner"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 1000,
-          transition: 'all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)',
-          backgroundColor: isScrolled ? 'rgba(248, 247, 242, 0.94)' : 'transparent',
-          backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: isScrolled ? 'blur(12px)' : 'none',
-          borderBottom: isScrolled ? '1px solid var(--border-medium)' : '1px solid transparent',
-          paddingTop: isScrolled ? '0.65rem' : '1.1rem',
-          paddingBottom: isScrolled ? '0.65rem' : '1.1rem'
-        }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-[#F8F7F2]/95 backdrop-blur-md border-b border-[var(--border-medium)] py-2.5 shadow-xs'
+            : 'bg-transparent border-b border-transparent py-4'
+        }`}
       >
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="container flex items-center justify-between">
           {/* Brand Wordmark & Monogram */}
           <a
             href="#hero"
             aria-label="Nitin Parmar — Return to top"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.85rem',
-              textDecoration: 'none'
-            }}
+            className="flex items-center gap-3.5 no-underline group"
           >
-            <Monogram size={34} />
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontWeight: 700,
-                  fontSize: '0.95rem',
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text-primary)',
-                  lineHeight: 1.2
-                }}
-              >
+            <Monogram size={34} className="group-hover:scale-105 transition-transform" />
+            <div className="flex flex-col">
+              <span className="font-sans font-bold text-[0.95rem] tracking-[-0.02em] text-[var(--text-primary)] leading-tight">
                 NITIN PARMAR
               </span>
-              <span
-                className="mono-label"
-                style={{
-                  fontSize: '0.68rem',
-                  color: 'var(--text-tertiary)',
-                  letterSpacing: '0.04em'
-                }}
-              >
+              <span className="mono-label text-[0.68rem] text-[var(--text-tertiary)] tracking-wider">
                 Full Stack Developer
               </span>
             </div>
@@ -88,17 +60,9 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
           <nav
             role="navigation"
             aria-label="Main menu"
-            className="desktop-nav"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '1.75rem',
-              padding: '0.4rem 1.25rem',
-              borderRadius: '999px',
-              backgroundColor: isScrolled ? 'var(--bg-subtle)' : 'rgba(255, 255, 255, 0.65)',
-              border: '1px solid var(--border-light)',
-              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.03)'
-            }}
+            className={`hidden md:flex items-center gap-7 px-5 py-1.5 rounded-full border border-[var(--border-light)] shadow-xs transition-colors ${
+              isScrolled ? 'bg-[var(--bg-subtle)]' : 'bg-white/70 backdrop-blur-xs'
+            }`}
           >
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
@@ -106,30 +70,15 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                 <a
                   key={link.id}
                   href={link.href}
-                  style={{
-                    fontFamily: 'var(--font-sans)',
-                    fontSize: '0.84rem',
-                    fontWeight: isActive ? 600 : 500,
-                    color: isActive ? 'var(--accent-vermilion)' : 'var(--text-secondary)',
-                    position: 'relative',
-                    padding: '0.2rem 0',
-                    transition: 'color var(--transition-fast)'
-                  }}
-                  className="nav-link"
+                  className={`text-sm font-sans transition-colors relative py-1 ${
+                    isActive
+                      ? 'text-[var(--accent-vermilion)] font-semibold'
+                      : 'text-[var(--text-secondary)] font-medium hover:text-[var(--text-primary)]'
+                  }`}
                 >
                   {link.label}
                   {isActive && (
-                    <span
-                      style={{
-                        position: 'absolute',
-                        bottom: '-2px',
-                        left: 0,
-                        right: 0,
-                        height: '2px',
-                        backgroundColor: 'var(--accent-vermilion)',
-                        borderRadius: '2px'
-                      }}
-                    />
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--accent-vermilion)] rounded-full" />
                   )}
                 </a>
               );
@@ -137,42 +86,15 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
           </nav>
 
           {/* Right Action & Status Indicator */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div
-              className="status-pill"
-              style={{
-                display: 'none',
-                alignItems: 'center',
-                gap: '0.45rem',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.72rem',
-                color: 'var(--text-secondary)',
-                padding: '0.35rem 0.65rem',
-                backgroundColor: 'rgba(46, 125, 50, 0.08)',
-                border: '1px solid rgba(46, 125, 50, 0.2)',
-                borderRadius: '4px'
-              }}
-            >
-              <span
-                style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  backgroundColor: '#2E7D32',
-                  display: 'inline-block'
-                }}
-              />
+          <div className="flex items-center gap-4">
+            <div className="hidden lg:inline-flex items-center gap-2 font-mono text-xs text-[var(--text-secondary)] px-2.5 py-1.5 bg-green-900/5 border border-green-700/20 rounded">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse inline-block" />
               <span>Ahmedabad, IN</span>
             </div>
 
             <a
               href="#contact"
-              className="btn btn-primary"
-              style={{
-                fontSize: '0.82rem',
-                padding: '0.55rem 1.1rem',
-                borderRadius: '4px'
-              }}
+              className="btn btn-primary text-xs sm:text-sm py-2 px-3.5 sm:px-4 rounded"
             >
               <span>Let's Talk</span>
               <ArrowUpRight size={14} className="btn-icon-arrow" />
@@ -181,18 +103,9 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="mobile-toggle"
+              className="flex md:hidden bg-transparent border border-[var(--border-medium)] rounded p-2 text-[var(--text-primary)] hover:bg-[var(--bg-subtle)] cursor-pointer"
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
-              style={{
-                display: 'none',
-                background: 'transparent',
-                border: '1px solid var(--border-medium)',
-                borderRadius: '4px',
-                padding: '0.5rem',
-                cursor: 'pointer',
-                color: 'var(--text-primary)'
-              }}
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -206,72 +119,35 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
           role="dialog"
           aria-modal="true"
           aria-label="Mobile Navigation"
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'var(--bg-primary)',
-            zIndex: 999,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '2rem',
-            animation: 'fadeIn 0.2s ease-out'
-          }}
+          className="fixed inset-0 bg-[#F8F7F2] z-[999] flex flex-col justify-center p-8 animate-[fadeIn_0.2s_ease-out]"
         >
-          <div
-            style={{
-              position: 'absolute',
-              top: '1.2rem',
-              right: '1.2rem'
-            }}
-          >
+          <div className="absolute top-5 right-5">
             <button
               onClick={() => setMobileMenuOpen(false)}
               aria-label="Close menu"
-              style={{
-                background: 'none',
-                border: '1px solid var(--border-medium)',
-                borderRadius: '4px',
-                padding: '0.5rem',
-                cursor: 'pointer'
-              }}
+              className="p-2 border border-[var(--border-medium)] rounded bg-white text-[var(--text-primary)] cursor-pointer"
             >
               <X size={24} />
             </button>
           </div>
 
-          <div style={{ marginBottom: '2rem' }}>
-            <span className="mono-label" style={{ color: 'var(--accent-vermilion)' }}>
+          <div className="mb-8">
+            <span className="mono-label text-[var(--accent-vermilion)]">
               INDEX // NAVIGATION
             </span>
           </div>
 
-          <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          <nav className="flex flex-col gap-6">
             {navLinks.map((link, idx) => (
               <a
                 key={link.id}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontSize: '2rem',
-                  color: activeSection === link.id ? 'var(--accent-vermilion)' : 'var(--text-primary)',
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  gap: '1rem',
-                  textDecoration: 'none'
-                }}
+                className={`font-display text-3xl flex items-baseline gap-4 no-underline ${
+                  activeSection === link.id ? 'text-[var(--accent-vermilion)] font-medium' : 'text-[var(--text-primary)]'
+                }`}
               >
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.9rem',
-                    color: 'var(--text-tertiary)'
-                  }}
-                >
+                <span className="font-mono text-sm text-[var(--text-tertiary)]">
                   0{idx + 1}.
                 </span>
                 <span>{link.label}</span>
@@ -279,51 +155,17 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             ))}
           </nav>
 
-          <div
-            style={{
-              marginTop: '3rem',
-              paddingTop: '2rem',
-              borderTop: '1px solid var(--border-medium)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.8rem'
-            }}
-          >
+          <div className="mt-12 pt-8 border-t border-[var(--border-medium)] flex flex-col gap-2">
             <span className="mono-label">CONTACT DIRECT</span>
             <a
               href="mailto:nitinparmar4320@gmail.com"
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.9rem',
-                color: 'var(--text-primary)',
-                fontWeight: 600
-              }}
+              className="font-mono text-sm sm:text-base text-[var(--text-primary)] font-semibold hover:text-[var(--accent-vermilion)] transition-colors"
             >
               nitinparmar4320@gmail.com
             </a>
           </div>
         </div>
       )}
-
-      <style>{`
-        @media (min-width: 900px) {
-          .status-pill {
-            display: inline-flex !important;
-          }
-        }
-        @media (max-width: 820px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-toggle {
-            display: flex !important;
-          }
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-      `}</style>
     </>
   );
 };

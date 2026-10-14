@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Mail, Copy, Check, ArrowUpRight, Send, MapPin, Sparkles } from 'lucide-react';
 import { LinkedinIcon, GithubIcon } from '../common/SocialIcons';
@@ -43,142 +45,62 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
     <section id="contact" className="section-spacing" aria-label="Contact Nitin Parmar">
       <div className="container">
         {/* Editorial Index Header */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            borderBottom: '1px solid var(--border-medium)',
-            paddingBottom: '0.75rem',
-            marginBottom: 'var(--space-2xl)'
-          }}
-        >
+        <div className="flex items-center justify-between border-b border-[var(--border-medium)] pb-3 mb-10 md:mb-12">
           <span className="mono-label">
-            <span style={{ color: 'var(--accent-vermilion)' }}>[06]</span> // INITIATE DIALOGUE
+            <span className="text-[var(--accent-vermilion)]">[06]</span> // INITIATE DIALOGUE
           </span>
           <span className="mono-label">RECRUITER & TEAM CHANNELS</span>
         </div>
 
         {/* Main Editorial Contact Composition */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(320px, 1.25fr) minmax(320px, 1fr)',
-            gap: 'var(--space-3xl)',
-            alignItems: 'start'
-          }}
-          className="contact-grid"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.25fr)_minmax(320px,1fr)] gap-12 lg:gap-16 items-start">
           {/* Left Column: Headline, Narrative, and Direct Channels */}
           <div>
-            <h2
-              style={{
-                fontSize: 'clamp(2.4rem, 4vw, 3.8rem)',
-                lineHeight: 1.1,
-                letterSpacing: '-0.02em',
-                marginBottom: '1.5rem',
-                color: 'var(--text-primary)'
-              }}
-            >
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-[-0.02em] mb-6 text-[var(--text-primary)]">
               Have something{' '}
-              <span
-                style={{
-                  fontFamily: 'var(--font-display)',
-                  fontStyle: 'italic',
-                  fontWeight: 400,
-                  color: 'var(--accent-vermilion)'
-                }}
-              >
+              <span className="italic font-normal text-[var(--accent-vermilion)]">
                 worth building?
               </span>
             </h2>
 
-            <p
-              style={{
-                fontSize: 'clamp(1.05rem, 1.3vw, 1.2rem)',
-                lineHeight: 1.65,
-                color: 'var(--text-secondary)',
-                marginBottom: '2.5rem',
-                maxWidth: '560px'
-              }}
-            >
+            <p className="text-lg sm:text-xl leading-relaxed text-[var(--text-secondary)] mb-8 max-w-xl">
               I'm interested in connecting with teams working on thoughtful products, challenging engineering problems, and meaningful web experiences.
             </p>
 
             {/* Direct Channel Action Cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
+            <div className="flex flex-col gap-4 mb-8">
               {/* Primary Email Card */}
-              <div
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid var(--border-medium)',
-                  borderRadius: '6px',
-                  padding: '1.25rem 1.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  gap: '1rem',
-                  boxShadow: 'var(--shadow-subtle)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                  <div
-                    style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '4px',
-                      backgroundColor: 'var(--bg-subtle)',
-                      border: '1px solid var(--border-medium)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'var(--accent-vermilion)'
-                    }}
-                  >
+              <div className="bg-white border border-[var(--border-medium)] rounded-md p-5 sm:p-6 flex items-center justify-between flex-wrap gap-4 shadow-[var(--shadow-subtle)]">
+                <div className="flex items-center gap-3.5">
+                  <div className="w-10 h-10 rounded bg-[var(--bg-subtle)] border border-[var(--border-medium)] flex items-center justify-center text-[var(--accent-vermilion)] shrink-0">
                     <Mail size={18} />
                   </div>
                   <div>
-                    <span className="mono-label" style={{ fontSize: '0.68rem', display: 'block' }}>
+                    <span className="mono-label text-xs block mb-0.5">
                       DIRECT EMAIL
                     </span>
                     <a
                       href={`mailto:${emailAddress}`}
-                      style={{
-                        fontSize: '0.95rem',
-                        fontWeight: 600,
-                        color: 'var(--text-primary)',
-                        fontFamily: 'var(--font-mono)'
-                      }}
+                      className="text-sm sm:text-base font-semibold text-[var(--text-primary)] font-mono hover:text-[var(--accent-vermilion)] transition-colors"
                     >
                       {emailAddress}
                     </a>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div className="flex items-center gap-2">
                   <button
                     onClick={handleCopy}
-                    className="btn btn-secondary"
-                    style={{
-                      fontSize: '0.78rem',
-                      padding: '0.45rem 0.85rem',
-                      gap: '0.4rem'
-                    }}
+                    className="btn btn-secondary text-xs py-1.5 px-3 gap-1.5 rounded cursor-pointer"
                     aria-label="Copy email address"
                   >
-                    {copied ? <Check size={14} color="#16A34A" /> : <Copy size={14} />}
+                    {copied ? <Check size={14} className="text-green-600" /> : <Copy size={14} />}
                     <span>{copied ? 'Copied' : 'Copy'}</span>
                   </button>
 
                   <a
                     href={`mailto:${emailAddress}`}
-                    className="btn btn-primary"
-                    style={{
-                      fontSize: '0.78rem',
-                      padding: '0.45rem 0.85rem',
-                      gap: '0.4rem'
-                    }}
+                    className="btn btn-primary text-xs py-1.5 px-3.5 gap-1.5 rounded"
                   >
                     <span>Email Me</span>
                     <ArrowUpRight size={14} className="btn-icon-arrow" />
@@ -187,44 +109,26 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
               </div>
 
               {/* LinkedIn & GitHub Cards Grid */}
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '1rem'
-                }}
-                className="social-cards-grid"
-              >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* LinkedIn */}
                 <a
                   href={linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid var(--border-medium)',
-                    borderRadius: '6px',
-                    padding: '1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    textDecoration: 'none',
-                    transition: 'all var(--transition-fast)'
-                  }}
-                  className="social-card"
+                  className="bg-white border border-[var(--border-medium)] rounded-md p-5 flex items-center justify-between no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--text-primary)] shadow-[var(--shadow-subtle)] hover:shadow-md"
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div className="flex items-center gap-3">
                     <LinkedinIcon size={20} color="var(--accent-blue)" />
                     <div>
-                      <span className="mono-label" style={{ fontSize: '0.65rem', display: 'block' }}>
+                      <span className="mono-label text-[0.65rem] block mb-0.5">
                         PROFESSIONAL NETWORK
                       </span>
-                      <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                      <span className="text-sm font-semibold text-[var(--text-primary)]">
                         LinkedIn Profile
                       </span>
                     </div>
                   </div>
-                  <ArrowUpRight size={15} color="var(--text-tertiary)" />
+                  <ArrowUpRight size={15} className="text-[var(--text-tertiary)]" />
                 </a>
 
                 {/* GitHub */}
@@ -232,92 +136,53 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                   href={githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    border: '1px solid var(--border-medium)',
-                    borderRadius: '6px',
-                    padding: '1.25rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    textDecoration: 'none',
-                    transition: 'all var(--transition-fast)'
-                  }}
-                  className="social-card"
+                  className="bg-white border border-[var(--border-medium)] rounded-md p-5 flex items-center justify-between no-underline transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--text-primary)] shadow-[var(--shadow-subtle)] hover:shadow-md"
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div className="flex items-center gap-3">
                     <GithubIcon size={20} color="var(--text-primary)" />
                     <div>
-                      <span className="mono-label" style={{ fontSize: '0.65rem', display: 'block' }}>
+                      <span className="mono-label text-[0.65rem] block mb-0.5">
                         CODE REPOSITORIES
                       </span>
-                      <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                      <span className="text-sm font-semibold text-[var(--text-primary)]">
                         GitHub Profile
                       </span>
                     </div>
                   </div>
-                  <ArrowUpRight size={15} color="var(--text-tertiary)" />
+                  <ArrowUpRight size={15} className="text-[var(--text-tertiary)]" />
                 </a>
               </div>
             </div>
 
             {/* Location Note */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-tertiary)' }}>
-              <MapPin size={14} color="var(--accent-vermilion)" />
-              <span className="mono-label" style={{ fontSize: '0.72rem' }}>
+            <div className="flex items-center gap-2 text-[var(--text-tertiary)]">
+              <MapPin size={14} className="text-[var(--accent-vermilion)] shrink-0" />
+              <span className="mono-label text-xs">
                 BASED IN AHMEDABAD, GUJARAT, INDIA (IST / UTC+5:30)
               </span>
             </div>
           </div>
 
           {/* Right Column: Interactive Email Dispatch Composer */}
-          <div
-            style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid var(--border-medium)',
-              borderRadius: '6px',
-              padding: '2rem',
-              boxShadow: 'var(--shadow-card)',
-              position: 'relative'
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid var(--border-light)',
-                paddingBottom: '0.85rem',
-                marginBottom: '1.5rem'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <Sparkles size={15} color="var(--accent-vermilion)" />
-                <span className="mono-label" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+          <div className="bg-white border border-[var(--border-medium)] rounded-md p-6 sm:p-8 shadow-[var(--shadow-card)] relative">
+            <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-3.5 mb-6">
+              <div className="flex items-center gap-2">
+                <Sparkles size={15} className="text-[var(--accent-vermilion)]" />
+                <span className="mono-label text-[var(--text-primary)] font-semibold text-xs tracking-wider">
                   QUICK DISPATCH // RECRUITER HELPER
                 </span>
               </div>
-              <span className="mono-label" style={{ fontSize: '0.68rem' }}>
+              <span className="mono-label text-[0.68rem] text-[var(--text-tertiary)]">
                 PRE-FORMATTED DRAFT
               </span>
             </div>
 
             {/* Topic Selectors */}
-            <div style={{ marginBottom: '1.25rem' }}>
-              <label
-                style={{
-                  display: 'block',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-tertiary)',
-                  marginBottom: '0.65rem'
-                }}
-              >
+            <div className="mb-5">
+              <label className="block font-mono text-xs tracking-wider uppercase text-[var(--text-tertiary)] mb-2.5">
                 SELECT DISCUSSION TOPIC
               </label>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {topics.map((t) => {
                   const isSelected = selectedTopic === t.id;
                   return (
@@ -325,18 +190,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                       key={t.id}
                       type="button"
                       onClick={() => setSelectedTopic(t.id)}
-                      style={{
-                        padding: '0.6rem 0.75rem',
-                        borderRadius: '4px',
-                        border: isSelected ? '1px solid var(--accent-vermilion)' : '1px solid var(--border-light)',
-                        backgroundColor: isSelected ? 'var(--bg-subtle)' : '#FFFFFF',
-                        color: isSelected ? 'var(--accent-vermilion)' : 'var(--text-primary)',
-                        fontSize: '0.78rem',
-                        fontWeight: isSelected ? 600 : 500,
-                        textAlign: 'left',
-                        cursor: 'pointer',
-                        transition: 'all var(--transition-fast)'
-                      }}
+                      className={`p-2.5 rounded text-left text-xs font-sans transition-all cursor-pointer ${
+                        isSelected
+                          ? 'border border-[var(--accent-vermilion)] bg-[var(--bg-subtle)] text-[var(--accent-vermilion)] font-semibold shadow-xs'
+                          : 'border border-[var(--border-light)] bg-white text-[var(--text-primary)] hover:border-[var(--border-strong)]'
+                      }`}
                     >
                       {t.label}
                     </button>
@@ -346,18 +204,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
             </div>
 
             {/* Recruiter Name Input */}
-            <div style={{ marginBottom: '1.25rem' }}>
+            <div className="mb-5">
               <label
                 htmlFor="recruiter-name-input"
-                style={{
-                  display: 'block',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-tertiary)',
-                  marginBottom: '0.4rem'
-                }}
+                className="block font-mono text-xs tracking-wider uppercase text-[var(--text-tertiary)] mb-1.5"
               >
                 YOUR NAME / COMPANY (OPTIONAL)
               </label>
@@ -367,33 +217,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                 placeholder="e.g. Sarah Jenkins from Acme Engineering"
                 value={recruiterName}
                 onChange={(e) => setRecruiterName(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '0.65rem 0.85rem',
-                  borderRadius: '4px',
-                  border: '1px solid var(--border-medium)',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.88rem',
-                  color: 'var(--text-primary)',
-                  backgroundColor: 'var(--bg-subtle)',
-                  outline: 'none'
-                }}
+                className="w-full px-3.5 py-2.5 rounded border border-[var(--border-medium)] font-sans text-sm text-[var(--text-primary)] bg-[var(--bg-subtle)] focus:bg-white focus:border-[var(--accent-vermilion)] outline-none transition-colors"
               />
             </div>
 
             {/* Custom Note Input */}
-            <div style={{ marginBottom: '1.5rem' }}>
+            <div className="mb-6">
               <label
                 htmlFor="recruiter-note-input"
-                style={{
-                  display: 'block',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
-                  letterSpacing: '0.04em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-tertiary)',
-                  marginBottom: '0.4rem'
-                }}
+                className="block font-mono text-xs tracking-wider uppercase text-[var(--text-tertiary)] mb-1.5"
               >
                 NOTE OR DETAILS (OPTIONAL)
               </label>
@@ -403,68 +235,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                 placeholder="We have an open role for a Full Stack Engineer focusing on React & Node.js..."
                 value={customNote}
                 onChange={(e) => setCustomNote(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '0.65rem 0.85rem',
-                  borderRadius: '4px',
-                  border: '1px solid var(--border-medium)',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.88rem',
-                  color: 'var(--text-primary)',
-                  backgroundColor: 'var(--bg-subtle)',
-                  outline: 'none',
-                  resize: 'vertical'
-                }}
+                className="w-full px-3.5 py-2.5 rounded border border-[var(--border-medium)] font-sans text-sm text-[var(--text-primary)] bg-[var(--bg-subtle)] focus:bg-white focus:border-[var(--accent-vermilion)] outline-none transition-colors resize-y"
               />
             </div>
 
             {/* Launch Mail Client Button */}
             <a
               href={getMailtoHref()}
-              className="btn btn-accent"
-              style={{
-                width: '100%',
-                padding: '0.85rem',
-                fontSize: '0.9rem'
-              }}
+              className="btn btn-accent w-full py-3.5 text-sm gap-2"
             >
               <Send size={15} />
               <span>Launch Pre-Filled Email</span>
             </a>
 
-            <div
-              style={{
-                marginTop: '1rem',
-                textAlign: 'center',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.68rem',
-                color: 'var(--text-tertiary)'
-              }}
-            >
+            <div className="mt-4 text-center font-mono text-[0.68rem] text-[var(--text-tertiary)]">
               Direct mailto protocol • Opens in default email client (Outlook, Apple Mail, Gmail)
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .contact-grid {
-            grid-template-columns: 1fr !important;
-            gap: var(--space-2xl) !important;
-          }
-        }
-        @media (max-width: 600px) {
-          .social-cards-grid {
-            grid-template-columns: 1fr !important;
-          }
-        }
-        .social-card:hover {
-          border-color: var(--text-primary) !important;
-          transform: translateY(-2px);
-          box-shadow: var(--shadow-subtle);
-        }
-      `}</style>
     </section>
   );
 };

@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect } from 'react';
 import { CheckCircle2, X } from 'lucide-react';
 
@@ -28,46 +30,20 @@ export const Toast: React.FC<ToastProps> = ({
     <div
       role="status"
       aria-live="polite"
-      style={{
-        position: 'fixed',
-        bottom: '24px',
-        right: '24px',
-        zIndex: 9999,
-        backgroundColor: 'var(--text-primary)',
-        color: '#FFFFFF',
-        padding: '0.85rem 1.25rem',
-        borderRadius: '6px',
-        boxShadow: '0 8px 30px rgba(0, 0, 0, 0.18)',
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.75rem',
-        fontFamily: 'var(--font-sans)',
-        fontSize: '0.88rem',
-        fontWeight: 500,
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        animation: 'slideUpFade 0.25s cubic-bezier(0.2, 0.8, 0.2, 1)'
-      }}
+      className="fixed bottom-6 right-6 z-[9999] bg-[#20211F] text-white px-5 py-3.5 rounded-md shadow-2xl flex items-center gap-3 font-sans text-sm font-medium border border-white/10 animate-[slideUp_0.25s_cubic-bezier(0.2,0.8,0.2,1)]"
     >
-      <CheckCircle2 size={18} color="#4ADE80" />
+      <CheckCircle2 size={18} className="text-green-400 shrink-0" />
       <span>{message}</span>
       <button
         onClick={onClose}
-        style={{
-          background: 'transparent',
-          border: 'none',
-          color: 'rgba(255, 255, 255, 0.6)',
-          cursor: 'pointer',
-          padding: '2px',
-          display: 'flex',
-          marginLeft: '0.5rem'
-        }}
+        className="text-white/60 hover:text-white p-0.5 ml-2 cursor-pointer transition-colors"
         aria-label="Close notification"
       >
         <X size={15} />
       </button>
 
-      <style>{`
-        @keyframes slideUpFade {
+      <style jsx>{`
+        @keyframes slideUp {
           from {
             opacity: 0;
             transform: translateY(12px) scale(0.97);

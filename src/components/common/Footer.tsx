@@ -1,10 +1,16 @@
-import React from 'react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
 import { Monogram } from './Monogram';
 import { ArrowUp, Mail } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 
 export const Footer: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = useState<number>(2026);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -16,63 +22,31 @@ export const Footer: React.FC = () => {
   return (
     <footer
       role="contentinfo"
-      style={{
-        backgroundColor: 'var(--bg-primary)',
-        borderTop: '1px solid var(--border-medium)',
-        paddingTop: 'var(--space-3xl)',
-        paddingBottom: 'var(--space-2xl)',
-        position: 'relative'
-      }}
+      className="bg-[var(--bg-primary)] border-t border-[var(--border-medium)] pt-16 pb-12 relative"
     >
       <div className="container">
         {/* Top Tier */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1.5rem',
-            paddingBottom: '2rem',
-            borderBottom: '1px solid var(--border-light)'
-          }}
-        >
+        <div className="flex items-center justify-between flex-wrap gap-6 pb-8 border-b border-[var(--border-light)]">
           {/* Brand Identity */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="flex items-center gap-4">
             <Monogram size={38} />
             <div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-sans)',
-                  fontWeight: 700,
-                  fontSize: '1rem',
-                  letterSpacing: '-0.02em',
-                  color: 'var(--text-primary)',
-                  lineHeight: 1.2
-                }}
-              >
+              <div className="font-sans font-bold text-base tracking-[-0.02em] text-[var(--text-primary)] leading-tight">
                 NITIN PARMAR
               </div>
-              <div className="mono-label" style={{ fontSize: '0.72rem' }}>
+              <div className="mono-label text-xs">
                 Full Stack Developer • Ahmedabad, India
               </div>
             </div>
           </div>
 
           {/* Social Links & Back to Top */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', flexWrap: 'wrap' }}>
+          <div className="flex items-center gap-5 flex-wrap">
             <a
               href="https://github.com/nitinparmar4320"
               target="_blank"
               rel="noopener noreferrer"
-              className="mono-label"
-              style={{
-                color: 'var(--text-secondary)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                transition: 'color var(--transition-fast)'
-              }}
+              className="mono-label text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1.5"
             >
               <GithubIcon size={15} />
               <span>GitHub</span>
@@ -82,14 +56,7 @@ export const Footer: React.FC = () => {
               href="https://www.linkedin.com/in/nitinparmar4320"
               target="_blank"
               rel="noopener noreferrer"
-              className="mono-label"
-              style={{
-                color: 'var(--text-secondary)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                transition: 'color var(--transition-fast)'
-              }}
+              className="mono-label text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1.5"
             >
               <LinkedinIcon size={15} />
               <span>LinkedIn</span>
@@ -97,14 +64,7 @@ export const Footer: React.FC = () => {
 
             <a
               href="mailto:nitinparmar4320@gmail.com"
-              className="mono-label"
-              style={{
-                color: 'var(--text-secondary)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.4rem',
-                transition: 'color var(--transition-fast)'
-              }}
+              className="mono-label text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors inline-flex items-center gap-1.5"
             >
               <Mail size={15} />
               <span>Email</span>
@@ -112,13 +72,7 @@ export const Footer: React.FC = () => {
 
             <button
               onClick={scrollToTop}
-              className="btn btn-secondary"
-              style={{
-                fontSize: '0.78rem',
-                padding: '0.45rem 0.85rem',
-                gap: '0.4rem',
-                borderRadius: '4px'
-              }}
+              className="btn btn-secondary text-xs py-1.5 px-3 gap-1.5 rounded cursor-pointer"
               aria-label="Scroll back to top of page"
             >
               <span>Back to Top</span>
@@ -127,22 +81,10 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Tier: Minimal statement */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '1rem',
-            paddingTop: '1.5rem',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.72rem',
-            color: 'var(--text-tertiary)'
-          }}
-        >
+        {/* Bottom Tier */}
+        <div className="flex items-center justify-between flex-wrap gap-4 pt-6 font-mono text-xs text-[var(--text-tertiary)]">
           <div>Designed and built with intent. All rights reserved © {currentYear}.</div>
-          <div>REACT.JS // TYPESCRIPT // NODE.JS // POSTGRESQL</div>
+          <div className="tracking-wider">REACT.JS // TYPESCRIPT // NODE.JS // POSTGRESQL</div>
         </div>
       </div>
     </footer>
