@@ -131,18 +131,18 @@ export const ProjectCardSplit: React.FC<ProjectCardSplitProps> = ({ project }) =
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-y border-[var(--border-light)] mb-6">
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  STACK STRATEGY
+                  STACK STRATEGY:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  Decoupled Headless CMS (Next.js + WP)
+                  {' Decoupled Headless CMS (Next.js + WP)'}
                 </span>
               </div>
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  DATA INTERFACE
+                  DATA INTERFACE:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  GraphQL Schemas & REST Webhooks
+                  {' GraphQL Schemas & REST Webhooks'}
                 </span>
               </div>
             </div>

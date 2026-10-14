@@ -33,6 +33,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
   };
 
   const getMailtoHref = () => {
+    // console.log(recruiterName, customNote, selectedTopic);
+
     const currentTopic = topics.find((t) => t.id === selectedTopic) || topics[0];
     const subject = encodeURIComponent(currentTopic.subject);
     const body = encodeURIComponent(
@@ -77,13 +79,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                   </div>
                   <div>
                     <span className="mono-label text-xs block mb-0.5">
-                      DIRECT EMAIL
+                      DIRECT EMAIL:
                     </span>
                     <a
                       href={`mailto:${emailAddress}`}
                       className="text-sm sm:text-base font-semibold text-[var(--text-primary)] font-mono hover:text-[var(--accent-vermilion)] transition-colors"
                     >
-                      {emailAddress}
+                      {" " + emailAddress}
                     </a>
                   </div>
                 </div>
@@ -190,11 +192,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                       key={t.id}
                       type="button"
                       onClick={() => setSelectedTopic(t.id)}
-                      className={`p-2.5 rounded text-left text-xs font-sans transition-all cursor-pointer ${
-                        isSelected
-                          ? 'border border-[var(--accent-vermilion)] bg-[var(--bg-subtle)] text-[var(--accent-vermilion)] font-semibold shadow-xs'
-                          : 'border border-[var(--border-light)] bg-white text-[var(--text-primary)] hover:border-[var(--border-strong)]'
-                      }`}
+                      className={`p-2.5 rounded text-left text-xs font-sans transition-all cursor-pointer ${isSelected
+                        ? 'border border-[var(--accent-vermilion)] bg-[var(--bg-subtle)] text-[var(--accent-vermilion)] font-semibold shadow-xs'
+                        : 'border border-[var(--border-light)] bg-white text-[var(--text-primary)] hover:border-[var(--border-strong)]'
+                        }`}
                     >
                       {t.label}
                     </button>

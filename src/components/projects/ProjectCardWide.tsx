@@ -59,18 +59,18 @@ export const ProjectCardWide: React.FC<ProjectCardWideProps> = ({ project }) => 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-y border-[var(--border-light)] mb-6">
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  DEVELOPMENT ROLE
+                  DEVELOPMENT ROLE:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  Full Stack Engineer (MERN & PostgreSQL)
+                  {" Full Stack Engineer (MERN & PostgreSQL)"}
                 </span>
               </div>
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  CORE ARCHITECTURE
+                  CORE ARCHITECTURE:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  Microservices & API Integrations
+                  {" Microservices & API Integrations"}
                 </span>
               </div>
             </div>
@@ -173,16 +173,16 @@ export const ProjectCardWide: React.FC<ProjectCardWideProps> = ({ project }) => 
             </div>
 
             {/* Central Persistence & Payment Hub */}
-            <div className="p-4 rounded bg-[#20211F] text-white flex items-center justify-between border border-[#363833]">
+            <div className="p-4 rounded bg-[var(--bg-subtle)] border border-[var(--border-light)] flex items-center justify-between">
               <div>
-                <span className="mono-label text-[#E5533D] text-[0.68rem] block mb-0.5">
-                  SHARED TRANSACTION DATA BUS
+                <span className="mono-label text-[var(--accent-vermilion)] text-[0.68rem] block mb-0.5">
+                  SHARED TRANSACTION DATA BUS:
                 </span>
-                <span className="text-sm font-semibold text-[#F8F7F2]">
-                  PostgreSQL Relational Storage + Express.js API Gateway
+                <span className="text-sm font-semibold text-[var(--text-primary)]">
+                  {' PostgreSQL Relational Storage + Express.js API Gateway'}
                 </span>
               </div>
-              <CreditCard size={18} className="text-[#DEDED6] shrink-0 ml-2" />
+              <CreditCard size={18} className="text-[var(--accent-vermilion)] shrink-0 ml-2" />
             </div>
 
             {/* Admin Console Annotation */}

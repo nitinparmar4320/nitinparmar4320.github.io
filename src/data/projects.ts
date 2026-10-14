@@ -5,7 +5,7 @@ export const projectsData: Project[] = [
     id: 'shoppingate',
     number: '01',
     title: 'Shoppingate',
-    category: 'Multi-service commerce & travel platform',
+    category: 'Multi-service platform',
     description:
       'A multi-service platform connecting e-commerce, travel booking, hotel reservations, gift cards, and eSIM services into a unified operational ecosystem.',
     technologies: [
@@ -24,7 +24,7 @@ export const projectsData: Project[] = [
     ],
     resumeOutcome: {
       metric: '+35%',
-      label: 'Operational efficiency & 50+ active users supported',
+      label: 'Operational efficiency & 50k+ users supported',
       disclaimer: 'Resume-reported outcome metric; presented as stated in candidate documentation.'
     },
     links: [
@@ -115,21 +115,23 @@ export const projectsData: Project[] = [
     id: 'mpos',
     number: '04',
     title: 'MPOS',
-    category: 'Point-of-sale administration & operational inventory',
+    category: 'Point-of-sale administration & multi-store inventory',
     description:
-      'A point-of-sale administrative management interface engineered to streamline retail product cataloging, promotion scheduling, and Goods Received Note (GRN) logistics.',
+      'A comprehensive point-of-sale administration platform engineered to control 6 core operational workflows: product cataloging (CRUD creation, dynamic sorting, and stock management), promocode engines, Goods Received Note (GRN) logistics, supplier relationships, POS terminal customizations, and multi-store management.',
     technologies: [
       'React.js',
       'JavaScript (ES6+)',
       'State Management',
       'Component Architecture',
-      'REST APIs'
+      'REST APIs',
+      'Multi-Store Inventory'
     ],
     contributions: [
-      'Engineered structured administrative management consoles for managing product SKUs, price matrixes, discount tiers, and real-time order tracking.',
-      'Implemented digitized Goods Received Note (GRN) generation workflows to verify inbound inventory against supplier purchase orders.',
-      'Developed comprehensive system settings, tax configurations, and operational audit reporting tools for retail administrators.',
-      'Constructed resilient client-side form validation and state synchronizers handling high-volume inventory updates.'
+      'Engineered high-performance product catalog and stock administration module supporting creation forms, multi-column sorting, SKU tracking, and real-time inventory adjustments.',
+      'Implemented digitized Goods Received Note (GRN) workflows and supplier management systems to reconcile inbound shipments against vendor purchase orders.',
+      'Architected dynamic promocode rule matrix configuring discount percentages, cart thresholds, time-sensitive campaigns, and automatic cashier validation.',
+      'Developed multi-store management consoles and granular POS customization controls to configure register layouts, receipt formats, and outlet-specific settings.',
+      'Constructed resilient client-side state synchronizers and form validation pipelines handling high-density catalog updates and stock synchronization across outlets.'
     ],
     resumeOutcome: {
       metric: '20+',

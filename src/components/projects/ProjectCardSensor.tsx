@@ -67,18 +67,18 @@ export const ProjectCardSensor: React.FC<ProjectCardSensorProps> = ({ project })
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-y border-[var(--border-light)] mb-6">
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  CORE PROTOCOL
+                  CORE PROTOCOL:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  Bidirectional WebSocket + Firebase Alerts
+                  {' Bidirectional WebSocket + Firebase Alerts'}
                 </span>
               </div>
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  ADMIN STRUCTURE
+                  ADMIN STRUCTURE:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  Super-Admin Multiple Panel Consoles
+                  {' Super-Admin Multiple Panel Consoles'}
                 </span>
               </div>
             </div>
@@ -189,16 +189,14 @@ export const ProjectCardSensor: React.FC<ProjectCardSensorProps> = ({ project })
 
             {/* Simulated Notification Pipeline */}
             <div
-              className={`border border-[var(--border-medium)] rounded p-3.5 sm:p-4 transition-colors flex items-center justify-between mb-4 ${
-                isAlertActive ? 'bg-red-50/90 border-red-300' : 'bg-white'
-              }`}
+              className={`border border-[var(--border-medium)] rounded p-3.5 sm:p-4 transition-colors flex items-center justify-between mb-4 ${isAlertActive ? 'bg-red-50/90 border-red-300' : 'bg-white'
+                }`}
             >
               <div className="flex items-center gap-3">
                 <Bell
                   size={16}
-                  className={`shrink-0 ${
-                    isAlertActive ? 'text-[var(--accent-vermilion)] animate-bounce' : 'text-[var(--accent-green)]'
-                  }`}
+                  className={`shrink-0 ${isAlertActive ? 'text-[var(--accent-vermilion)] animate-bounce' : 'text-[var(--accent-green)]'
+                    }`}
                 />
                 <div>
                   <span className="text-xs font-semibold block text-[var(--text-primary)]">
@@ -230,9 +228,8 @@ export const ProjectCardSensor: React.FC<ProjectCardSensorProps> = ({ project })
                 {['N-01', 'N-02', 'N-03', 'N-04', 'N-05'].map((node, i) => (
                   <div
                     key={node}
-                    className={`bg-white border border-[var(--border-medium)] rounded flex items-center justify-center font-mono text-[0.65rem] font-semibold ${
-                      i === 3 ? 'text-[var(--accent-vermilion)]' : 'text-[var(--accent-green)]'
-                    }`}
+                    className={`bg-white border border-[var(--border-medium)] rounded flex items-center justify-center font-mono text-[0.65rem] font-semibold ${i === 3 ? 'text-[var(--accent-vermilion)]' : 'text-[var(--accent-green)]'
+                      }`}
                   >
                     {node}
                   </div>
