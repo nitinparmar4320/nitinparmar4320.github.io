@@ -2,14 +2,50 @@
 
 import React, { useState } from 'react';
 import type { Project } from '@/types';
-import { Check, ReceiptText, FileCheck, Tag, ShoppingCart, SlidersHorizontal } from 'lucide-react';
+import {
+  Check,
+  ReceiptText,
+  FileCheck,
+  Tag,
+  ShoppingCart,
+  SlidersHorizontal,
+  Package,
+  Truck,
+  Store,
+  ArrowUpDown,
+  Plus,
+  Search,
+  Building2
+} from 'lucide-react';
 
 interface ProjectCardMposProps {
   project: Project;
 }
 
+type MenuKey = 'products' | 'promocode' | 'grn' | 'suppliers' | 'pos' | 'stores';
+
 export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project }) => {
-  const [activeTab, setActiveTab] = useState<'grn' | 'products'>('grn');
+  const [activeMenu, setActiveMenu] = useState<MenuKey>('products');
+  const [productSort, setProductSort] = useState<'stock' | 'price' | 'sku'>('stock');
+
+  const menuList: { id: MenuKey; label: string; icon: React.ElementType; tag: string }[] = [
+    { id: 'products', label: 'Products', icon: Package, tag: 'List, Sort & Stock' },
+    { id: 'promocode', label: 'Promocode', icon: Tag, tag: 'Discount Rules' },
+    { id: 'grn', label: 'GRN Flow', icon: FileCheck, tag: 'Inbound Auditing' },
+    { id: 'suppliers', label: 'Suppliers', icon: Truck, tag: 'Vendor Profiles' },
+    { id: 'pos', label: 'POS Config', icon: SlidersHorizontal, tag: 'Customizations' },
+    { id: 'stores', label: 'Store Mgmt', icon: Store, tag: 'Multi-Outlet Sync' }
+  ];
+
+  const sampleProducts = [
+    { sku: 'SKU #4092', name: 'Barcode Scanner Pro', category: 'Hardware', stock: 42, price: 129, status: 'In Stock' },
+    { sku: 'SKU #8812', name: 'Thermal Paper 80mm', category: 'Consumables', stock: 140, price: 24, status: 'In Stock' },
+    { sku: 'SKU #1105', name: 'Wireless Stand Base', category: 'Accessories', stock: 4, price: 89, status: 'Low Stock' },
+  ].sort((a, b) => {
+    if (productSort === 'stock') return b.stock - a.stock;
+    if (productSort === 'price') return b.price - a.price;
+    return a.sku.localeCompare(b.sku);
+  });
 
   return (
     <article
@@ -31,15 +67,358 @@ export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project }) => 
         <div className="flex items-center gap-2.5">
           <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--accent-amber)] bg-amber-500/10 px-2.5 py-1 rounded border border-amber-500/25">
             <ReceiptText size={12} />
-            GRN WORKFLOW AUTOMATION
+            6 OPERATIONAL MENUS INTEGRATED
           </span>
         </div>
       </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.15fr)_minmax(320px,1fr)]">
-        {/* Left Column: Context, Role, and Technical Details */}
-        <div className="p-6 sm:p-10 lg:border-r border-[var(--border-light)] flex flex-col justify-between">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.1fr)_minmax(320px,1.15fr)]">
+        {/* Left Column: Interactive 6-Menu Management Workspace */}
+        <div className="bg-[#FAF9F5] p-6 sm:p-10 lg:border-r border-[var(--border-light)] flex flex-col justify-center">
+          <div className="bg-white border border-[var(--border-medium)] rounded-md p-5 sm:p-6 shadow-[var(--shadow-subtle)]">
+            
+            {/* Console Header */}
+            <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-3 mb-4">
+              <span className="mono-label text-xs text-[var(--text-primary)] font-semibold flex items-center gap-1.5">
+                <Building2 size={13} className="text-[var(--accent-amber)]" />
+                POS ADMINISTRATIVE SUITE
+              </span>
+              <span className="font-mono text-xs text-[var(--accent-green)] font-semibold">
+                6 MENUS ACTIVE
+              </span>
+            </div>
+
+            {/* 6 Core Managed Menus Selector Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
+              {menuList.map((menu) => {
+                const Icon = menu.icon;
+                const isActive = activeMenu === menu.id;
+                return (
+                  <button
+                    key={menu.id}
+                    onClick={() => setActiveMenu(menu.id)}
+                    className={`p-2.5 rounded border text-left cursor-pointer transition-all ${
+                      isActive
+                        ? 'bg-[var(--bg-subtle)] border-[var(--accent-amber)] shadow-xs'
+                        : 'bg-white border-[var(--border-light)] hover:border-[var(--border-medium)]'
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Icon
+                        size={13}
+                        className={isActive ? 'text-[var(--accent-amber)]' : 'text-[var(--text-secondary)]'}
+                      />
+                      <span className={`text-xs font-semibold ${isActive ? 'text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
+                        {menu.label}
+                      </span>
+                    </div>
+                    <span className="text-[0.62rem] text-[var(--text-tertiary)] block font-mono">
+                      {menu.tag}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Active Workspace View */}
+            {activeMenu === 'products' && (
+              <div className="space-y-3">
+                <div className="bg-[var(--bg-subtle)] p-3.5 rounded border border-[var(--border-light)]">
+                  {/* Action Bar: Create & Sort Controls */}
+                  <div className="flex items-center justify-between gap-2 mb-3 flex-wrap">
+                    <div className="flex items-center gap-1.5 text-xs text-[var(--text-secondary)] font-mono">
+                      <Search size={12} className="text-[var(--text-tertiary)]" />
+                      <span>1,420 Items</span>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-[0.68rem] font-mono">
+                      <span className="text-[var(--text-tertiary)] flex items-center gap-1 mr-1">
+                        <ArrowUpDown size={11} />
+                        SORT:
+                      </span>
+                      <button
+                        onClick={() => setProductSort('stock')}
+                        className={`px-1.5 py-0.5 rounded cursor-pointer transition-colors ${
+                          productSort === 'stock'
+                            ? 'bg-white font-bold text-[var(--accent-amber)] border border-[var(--border-medium)]'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                        }`}
+                      >
+                        Stock
+                      </button>
+                      <button
+                        onClick={() => setProductSort('price')}
+                        className={`px-1.5 py-0.5 rounded cursor-pointer transition-colors ${
+                          productSort === 'price'
+                            ? 'bg-white font-bold text-[var(--accent-amber)] border border-[var(--border-medium)]'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                        }`}
+                      >
+                        Price
+                      </button>
+                      <button
+                        onClick={() => setProductSort('sku')}
+                        className={`px-1.5 py-0.5 rounded cursor-pointer transition-colors ${
+                          productSort === 'sku'
+                            ? 'bg-white font-bold text-[var(--accent-amber)] border border-[var(--border-medium)]'
+                            : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                        }`}
+                      >
+                        SKU
+                      </button>
+                    </div>
+
+                    <span className="inline-flex items-center gap-1 text-[0.68rem] font-mono text-[var(--accent-amber)] bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">
+                      <Plus size={11} />
+                      CREATE SKU
+                    </span>
+                  </div>
+
+                  {/* Product Rows with Stocks */}
+                  <div className="space-y-1.5">
+                    {sampleProducts.map((item) => (
+                      <div
+                        key={item.sku}
+                        className="bg-white border border-[var(--border-light)] rounded p-2 text-xs font-mono flex items-center justify-between"
+                      >
+                        <div>
+                          <div className="font-semibold text-[var(--text-primary)]">
+                            {item.name}
+                          </div>
+                          <div className="text-[0.65rem] text-[var(--text-tertiary)]">
+                            {item.sku} • {item.category} • ${item.price}
+                          </div>
+                        </div>
+
+                        <div className="text-right">
+                          <span
+                            className={`text-[0.68rem] font-semibold px-2 py-0.5 rounded ${
+                              item.status === 'Low Stock'
+                                ? 'bg-amber-500/15 text-[var(--accent-amber)]'
+                                : 'bg-green-700/10 text-[var(--accent-green)]'
+                            }`}
+                          >
+                            {item.stock} in stock
+                          </span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs font-mono text-[var(--text-tertiary)]">
+                  <span>Product listing, sorting & stock tracking</span>
+                  <span className="text-[var(--accent-amber)] font-medium">Synced: 3 Outlets</span>
+                </div>
+              </div>
+            )}
+
+            {activeMenu === 'promocode' && (
+              <div className="space-y-3">
+                <div className="bg-[var(--bg-subtle)] p-4 rounded border border-[var(--border-light)]">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono-label text-xs text-[var(--text-primary)]">
+                      ACTIVE PROMOCODE ENGINE
+                    </span>
+                    <span className="text-[0.68rem] font-mono text-[var(--accent-green)] font-semibold">
+                      3 RULES ACTIVE
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-2 text-xs font-mono">
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">CODE: FLASH25</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">25% off VIP tier carts over $50</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Auto-Valid</span>
+                    </div>
+
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">TIER: SEASONAL15</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">15% off basket total &gt; $100</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Active</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs font-mono text-[var(--text-tertiary)]">
+                  <span>Cart promotion matrix evaluated in real-time</span>
+                  <span className="text-[var(--accent-amber)] font-medium">Cashier Latency &lt; 15ms</span>
+                </div>
+              </div>
+            )}
+
+            {activeMenu === 'grn' && (
+              <div className="space-y-3">
+                <div className="bg-[var(--bg-subtle)] p-4 rounded border border-[var(--border-light)]">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="mono-label text-xs text-[var(--text-primary)]">
+                      DOC ID: GRN-2026-0894
+                    </span>
+                    <span className="font-mono text-xs text-[var(--accent-green)] font-semibold">
+                      STATUS: VERIFIED
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-2 text-xs mb-3">
+                    <div>
+                      <span className="mono-label text-[0.62rem] block">PO REF</span>
+                      <div className="font-semibold text-[var(--text-primary)]">PO-99412</div>
+                    </div>
+                    <div>
+                      <span className="mono-label text-[0.62rem] block">SUPPLIER</span>
+                      <div className="font-semibold text-[var(--text-primary)]">Apex Retail Dist.</div>
+                    </div>
+                    <div>
+                      <span className="mono-label text-[0.62rem] block">ITEMS</span>
+                      <div className="font-semibold text-[var(--text-primary)]">142 Checked</div>
+                    </div>
+                  </div>
+
+                  <div className="bg-white border border-[var(--border-light)] rounded p-2.5 font-mono text-xs space-y-1.5">
+                    <div className="flex justify-between pb-1.5 border-b border-[var(--border-light)]">
+                      <span>SKU #4092 Barcode Scanner</span>
+                      <span className="text-[var(--accent-green)] font-medium">+20 Rcvd</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>SKU #8812 Thermal Paper 80mm</span>
+                      <span className="text-[var(--accent-green)] font-medium">+100 Rcvd</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs font-mono text-[var(--text-tertiary)]">
+                  <span>Digitized goods receipt auditing against PO</span>
+                  <span className="text-[var(--accent-amber)] font-medium">Discrepancy: 0</span>
+                </div>
+              </div>
+            )}
+
+            {activeMenu === 'suppliers' && (
+              <div className="space-y-3">
+                <div className="bg-[var(--bg-subtle)] p-4 rounded border border-[var(--border-light)]">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono-label text-xs text-[var(--text-primary)]">
+                      SUPPLIER DIRECTORY & RECONCILIATION
+                    </span>
+                    <Truck size={13} className="text-[var(--accent-amber)]" />
+                  </div>
+
+                  <div className="flex flex-col gap-2 text-xs font-mono">
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">Apex Retail Dist. Co.</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">Hardware & Terminals • 4 Active POs</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">99.4% On-Time</span>
+                    </div>
+
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">Global POS Supplies Ltd.</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">Rolls & Barcode Labels • Net-30</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Active</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs font-mono text-[var(--text-tertiary)]">
+                  <span>Vendor management integrated with PO workflows</span>
+                  <span className="text-[var(--accent-amber)] font-medium">Direct GRN Link</span>
+                </div>
+              </div>
+            )}
+
+            {activeMenu === 'pos' && (
+              <div className="space-y-3">
+                <div className="bg-[var(--bg-subtle)] p-4 rounded border border-[var(--border-light)]">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono-label text-xs text-[var(--text-primary)]">
+                      POS TERMINAL CUSTOMIZATIONS
+                    </span>
+                    <SlidersHorizontal size={13} className="text-[var(--accent-amber)]" />
+                  </div>
+
+                  <div className="flex flex-col gap-2 text-xs font-mono">
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">Register Keypad Layout</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">4x4 Touch Grid with Category Fast-Keys</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Deployed</span>
+                    </div>
+
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">Receipt Format Builder</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">Custom Tax Reg, Store Barcode & Loyalty QR</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Active</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs font-mono text-[var(--text-tertiary)]">
+                  <span>Centralized terminal configurations</span>
+                  <span className="text-[var(--accent-amber)] font-medium">14 Registers Configured</span>
+                </div>
+              </div>
+            )}
+
+            {activeMenu === 'stores' && (
+              <div className="space-y-3">
+                <div className="bg-[var(--bg-subtle)] p-4 rounded border border-[var(--border-light)]">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="mono-label text-xs text-[var(--text-primary)]">
+                      MULTI-OUTLET STORE NETWORK
+                    </span>
+                    <Store size={13} className="text-[var(--accent-amber)]" />
+                  </div>
+
+                  <div className="flex flex-col gap-2 text-xs font-mono">
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">Store #01 - Downtown Flagship</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">8 Active POS Terminals • Inventory Synced</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Online</span>
+                    </div>
+
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">Store #02 - Westside Outlet</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">4 Active POS Terminals • Inventory Synced</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Online</span>
+                    </div>
+
+                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)] flex justify-between items-center">
+                      <div>
+                        <strong className="text-[var(--text-primary)]">Store #03 - Airport Kiosk</strong>
+                        <div className="text-[0.65rem] text-[var(--text-secondary)]">2 Active POS Terminals • Inventory Synced</div>
+                      </div>
+                      <span className="text-[var(--accent-green)] font-medium">Online</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between text-xs font-mono text-[var(--text-tertiary)]">
+                  <span>Store network telemetry & pricing distribution</span>
+                  <span className="text-[var(--accent-amber)] font-medium">Zero Variance</span>
+                </div>
+              </div>
+            )}
+
+          </div>
+        </div>
+
+        {/* Right Column: Context, Role, and Technical Details */}
+        <div className="p-6 sm:p-10 flex flex-col justify-between border-t lg:border-t-0 border-[var(--border-light)]">
           <div>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-4 text-[var(--text-primary)]">
               {project.title}
@@ -53,18 +432,18 @@ export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project }) => 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-y border-[var(--border-light)] mb-6">
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  CORE FOCUS
+                  CORE FOCUS:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  GRN Generation & Inventory Logistics
+                  {' Multi-Store POS & Inventory Logistics'}
                 </span>
               </div>
               <div>
                 <span className="mono-label text-xs block mb-1">
-                  ADMIN CAPACITY
+                  MANAGED MODULES:
                 </span>
                 <span className="text-sm font-semibold text-[var(--text-primary)]">
-                  20+ Active Admin Consoles
+                  {' 6 Core Administrative Menus'}
                 </span>
               </div>
             </div>
@@ -113,110 +492,6 @@ export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project }) => 
                 <p className="font-mono text-xs text-[var(--text-tertiary)] mt-1">
                   * {project.resumeOutcome.disclaimer}
                 </p>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Right Column: Goods Received Note (GRN) & Catalog Workspace Mockup */}
-        <div className="bg-[#FAF9F5] p-6 sm:p-10 flex flex-col justify-center border-t lg:border-t-0 border-[var(--border-light)]">
-          <div className="bg-white border border-[var(--border-medium)] rounded-md p-5 sm:p-6 shadow-[var(--shadow-subtle)]">
-            {/* Top Interactive Tabs */}
-            <div className="flex gap-2 border-b border-[var(--border-light)] pb-3 mb-4">
-              <button
-                onClick={() => setActiveTab('grn')}
-                className={`px-3 py-1.5 rounded text-xs font-mono font-medium flex items-center gap-1.5 cursor-pointer transition-colors ${
-                  activeTab === 'grn'
-                    ? 'bg-[var(--bg-subtle)] text-[var(--text-primary)] font-semibold border border-[var(--border-medium)]'
-                    : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
-                }`}
-              >
-                <FileCheck size={13} className={activeTab === 'grn' ? 'text-[var(--accent-amber)]' : 'inherit'} />
-                GRN AUDIT FLOW
-              </button>
-
-              <button
-                onClick={() => setActiveTab('products')}
-                className={`px-3 py-1.5 rounded text-xs font-mono font-medium flex items-center gap-1.5 cursor-pointer transition-colors ${
-                  activeTab === 'products'
-                    ? 'bg-[var(--bg-subtle)] text-[var(--text-primary)] font-semibold border border-[var(--border-medium)]'
-                    : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
-                }`}
-              >
-                <Tag size={13} className={activeTab === 'products' ? 'text-[var(--accent-amber)]' : 'inherit'} />
-                PROMOTION MATRIX
-              </button>
-            </div>
-
-            {activeTab === 'grn' ? (
-              <div>
-                <div className="bg-[var(--bg-subtle)] p-4 rounded border border-[var(--border-light)] mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="mono-label text-xs text-[var(--text-primary)]">
-                      DOC ID: GRN-2026-0894
-                    </span>
-                    <span className="font-mono text-xs text-[var(--accent-green)] font-semibold">
-                      STATUS: VERIFIED
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2 text-xs mb-3">
-                    <div>
-                      <span className="mono-label text-[0.62rem] block">PO REF</span>
-                      <div className="font-semibold text-[var(--text-primary)]">PO-99412</div>
-                    </div>
-                    <div>
-                      <span className="mono-label text-[0.62rem] block">SUPPLIER</span>
-                      <div className="font-semibold text-[var(--text-primary)]">Apex Retail Dist.</div>
-                    </div>
-                    <div>
-                      <span className="mono-label text-[0.62rem] block">ITEMS</span>
-                      <div className="font-semibold text-[var(--text-primary)]">142 Units Checked</div>
-                    </div>
-                  </div>
-
-                  {/* Item Rows */}
-                  <div className="bg-white border border-[var(--border-light)] rounded p-2.5 font-mono text-xs space-y-1.5">
-                    <div className="flex justify-between pb-1.5 border-b border-[var(--border-light)]">
-                      <span>SKU #4092 Barcode Scanner</span>
-                      <span className="text-[var(--accent-green)] font-medium">+20 Rcvd</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>SKU #8812 Thermal Paper 80mm</span>
-                      <span className="text-[var(--accent-green)] font-medium">+100 Rcvd</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between text-xs font-mono text-[var(--text-tertiary)]">
-                  <span>Inventory auto-synced across outlets</span>
-                  <span className="text-[var(--accent-amber)] font-medium">Discrepancy: 0</span>
-                </div>
-              </div>
-            ) : (
-              <div>
-                <div className="bg-[var(--bg-subtle)] p-4 rounded border border-[var(--border-light)] mb-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="mono-label text-xs text-[var(--text-primary)]">
-                      ACTIVE PROMOTION ENGINE
-                    </span>
-                    <SlidersHorizontal size={13} className="text-[var(--accent-amber)]" />
-                  </div>
-
-                  <div className="flex flex-col gap-2 text-xs font-mono">
-                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)]">
-                      <strong className="text-[var(--text-primary)]">Seasonal Discount Tier 1</strong>: 15% off cart value &gt; $100
-                    </div>
-                    <div className="bg-white p-2.5 rounded border border-[var(--border-light)]">
-                      <strong className="text-[var(--text-primary)]">Member Flash Special</strong>: Instant cashback via GRN audit link
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 text-xs font-mono text-[var(--text-secondary)]">
-                  <ShoppingCart size={13} className="text-[var(--accent-amber)]" />
-                  <span>Configured by POS Administrator Group</span>
-                </div>
               </div>
             )}
           </div>

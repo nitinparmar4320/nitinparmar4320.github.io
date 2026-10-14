@@ -32,10 +32,10 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     <>
       <header
         role="banner"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#F8F7F2] border-b border-[var(--border-medium)] ${
           isScrolled
-            ? 'bg-[#F8F7F2]/95 backdrop-blur-md border-b border-[var(--border-medium)] py-2.5 shadow-xs'
-            : 'bg-transparent border-b border-transparent py-4'
+            ? 'py-2.5 shadow-xs md:bg-[#F8F7F2]/95 md:backdrop-blur-md'
+            : 'py-3 md:bg-transparent md:border-transparent md:py-4'
         }`}
       >
         <div className="container flex items-center justify-between">
@@ -103,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
             {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="flex md:hidden bg-transparent border border-[var(--border-medium)] rounded p-2 text-[var(--text-primary)] hover:bg-[var(--bg-subtle)] cursor-pointer"
+              className="flex md:hidden bg-white border border-[var(--border-medium)] rounded p-2 text-[var(--text-primary)] hover:bg-[var(--bg-subtle)] cursor-pointer shadow-xs"
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
             >
