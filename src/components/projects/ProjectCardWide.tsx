@@ -1,5 +1,5 @@
 import React from 'react';
-import type { Project } from '../../types';
+import type { Project } from '@/types';
 import { ExternalLink, Check, ShoppingBag, Plane, Hotel, Smartphone, CreditCard, ShieldCheck } from 'lucide-react';
 
 interface ProjectCardWideProps {
@@ -10,69 +10,29 @@ export const ProjectCardWide: React.FC<ProjectCardWideProps> = ({ project }) => 
   return (
     <article
       id={project.id}
-      style={{
-        backgroundColor: '#FFFFFF',
-        border: '1px solid var(--border-medium)',
-        borderRadius: '6px',
-        overflow: 'hidden',
-        boxShadow: 'var(--shadow-card)',
-        marginBottom: 'var(--space-3xl)',
-        position: 'relative'
-      }}
-      className="project-card-wide"
+      className="bg-white border border-[var(--border-medium)] rounded-md overflow-hidden shadow-[var(--shadow-card)] mb-12 lg:mb-16 relative"
     >
       {/* Editorial Header Strip */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '1.25rem 2rem',
-          borderBottom: '1px solid var(--border-light)',
-          backgroundColor: 'var(--bg-subtle)',
-          flexWrap: 'wrap',
-          gap: '1rem'
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <span
-            style={{
-              fontFamily: 'var(--font-display)',
-              fontSize: '1.75rem',
-              fontWeight: 700,
-              color: 'var(--accent-vermilion)',
-              lineHeight: 1
-            }}
-          >
+      <div className="flex items-center justify-between p-5 sm:px-8 border-b border-[var(--border-light)] bg-[var(--bg-subtle)] flex-wrap gap-4">
+        <div className="flex items-center gap-4">
+          <span className="font-display text-2xl sm:text-3xl font-bold text-[var(--accent-vermilion)] leading-none">
             {project.number}
           </span>
-          <span
-            style={{
-              width: '1px',
-              height: '18px',
-              backgroundColor: 'var(--border-strong)',
-              display: 'inline-block'
-            }}
-          />
-          <span className="mono-label" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+          <span className="w-px h-4.5 bg-[var(--border-strong)] inline-block" />
+          <span className="mono-label text-[var(--text-primary)] font-semibold text-xs tracking-wider">
             {project.category.toUpperCase()}
           </span>
         </div>
 
         {project.links.length > 0 && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="flex items-center gap-3">
             {project.links.map((link) => (
               <a
                 key={link.url}
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-secondary"
-                style={{
-                  fontSize: '0.78rem',
-                  padding: '0.45rem 0.95rem',
-                  gap: '0.45rem'
-                }}
+                className="btn btn-secondary text-xs py-1.5 px-3.5 gap-2 rounded"
               >
                 <span>{link.label}</span>
                 <ExternalLink size={13} />
@@ -83,125 +43,50 @@ export const ProjectCardWide: React.FC<ProjectCardWideProps> = ({ project }) => 
       </div>
 
       {/* Main Content Asymmetric Split */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'minmax(320px, 1.15fr) minmax(320px, 1fr)',
-          gap: 0
-        }}
-        className="wide-grid"
-      >
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.15fr)_minmax(320px,1fr)]">
         {/* Left Column: Context, Role, and Technical Contributions */}
-        <div
-          style={{
-            padding: '2.5rem',
-            borderRight: '1px solid var(--border-light)',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between'
-          }}
-          className="wide-content-pane"
-        >
+        <div className="p-6 sm:p-10 lg:border-r border-[var(--border-light)] flex flex-col justify-between">
           <div>
-            <h3
-              style={{
-                fontSize: 'clamp(1.85rem, 2.6vw, 2.4rem)',
-                marginBottom: '1rem',
-                color: 'var(--text-primary)'
-              }}
-            >
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-medium mb-4 text-[var(--text-primary)]">
               {project.title}
             </h3>
 
-            <p
-              style={{
-                fontSize: '1.05rem',
-                lineHeight: 1.65,
-                color: 'var(--text-secondary)',
-                marginBottom: '1.75rem'
-              }}
-            >
+            <p className="text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] mb-6">
               {project.description}
             </p>
 
             {/* Role & Context Meta */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '1rem',
-                padding: '1rem 0',
-                borderTop: '1px solid var(--border-light)',
-                borderBottom: '1px solid var(--border-light)',
-                marginBottom: '1.75rem'
-              }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4 border-y border-[var(--border-light)] mb-6">
               <div>
-                <span className="mono-label" style={{ fontSize: '0.68rem', display: 'block' }}>
+                <span className="mono-label text-xs block mb-1">
                   DEVELOPMENT ROLE
                 </span>
-                <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                <span className="text-sm font-semibold text-[var(--text-primary)]">
                   Full Stack Engineer (MERN & PostgreSQL)
                 </span>
               </div>
               <div>
-                <span className="mono-label" style={{ fontSize: '0.68rem', display: 'block' }}>
+                <span className="mono-label text-xs block mb-1">
                   CORE ARCHITECTURE
                 </span>
-                <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+                <span className="text-sm font-semibold text-[var(--text-primary)]">
                   Microservices & API Integrations
                 </span>
               </div>
             </div>
 
             {/* Key Technical Contributions */}
-            <div style={{ marginBottom: '1.75rem' }}>
-              <span
-                className="mono-label"
-                style={{
-                  display: 'block',
-                  color: 'var(--text-primary)',
-                  marginBottom: '0.85rem',
-                  fontWeight: 600
-                }}
-              >
+            <div className="mb-6">
+              <span className="mono-label block text-[var(--text-primary)] mb-3 font-semibold text-xs tracking-wider">
                 KEY TECHNICAL CONTRIBUTIONS
               </span>
-              <ul
-                style={{
-                  listStyle: 'none',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.75rem'
-                }}
-              >
+              <ul className="space-y-3">
                 {project.contributions.map((contribution, idx) => (
                   <li
                     key={idx}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: '0.75rem',
-                      fontSize: '0.9rem',
-                      lineHeight: 1.55,
-                      color: 'var(--text-secondary)'
-                    }}
+                    className="flex items-start gap-3 text-sm leading-relaxed text-[var(--text-secondary)]"
                   >
-                    <span
-                      style={{
-                        marginTop: '0.2rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: '16px',
-                        height: '16px',
-                        borderRadius: '50%',
-                        backgroundColor: 'var(--bg-subtle)',
-                        border: '1px solid var(--border-medium)',
-                        color: 'var(--accent-vermilion)',
-                        flexShrink: 0
-                      }}
-                    >
+                    <span className="mt-1 flex items-center justify-center w-4 h-4 rounded-full bg-[var(--bg-subtle)] border border-[var(--border-medium)] text-[var(--accent-vermilion)] shrink-0">
                       <Check size={10} />
                     </span>
                     <span>{contribution}</span>
@@ -212,62 +97,26 @@ export const ProjectCardWide: React.FC<ProjectCardWideProps> = ({ project }) => 
           </div>
 
           {/* Technology Badges & Resume Callout */}
-          <div>
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '0.4rem',
-                marginBottom: '1.5rem'
-              }}
-            >
+          <div className="pt-4">
+            <div className="flex flex-wrap gap-1.5 mb-5">
               {project.technologies.map((tech) => (
-                <span key={tech} className="mono-tag">
+                <span key={tech} className="mono-tag text-xs">
                   {tech}
                 </span>
               ))}
             </div>
 
             {project.resumeOutcome && (
-              <div
-                style={{
-                  padding: '0.85rem 1.15rem',
-                  backgroundColor: 'var(--bg-subtle)',
-                  borderRadius: '4px',
-                  border: '1px solid var(--border-medium)',
-                  borderLeft: '3px solid var(--accent-vermilion)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.6rem' }}>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-display)',
-                      fontSize: '1.25rem',
-                      fontWeight: 700,
-                      color: 'var(--accent-vermilion)'
-                    }}
-                  >
+              <div className="p-3.5 sm:p-4 bg-[var(--bg-subtle)] rounded border border-[var(--border-medium)] border-l-4 border-l-[var(--accent-vermilion)]">
+                <div className="flex items-baseline gap-2.5">
+                  <span className="font-display text-xl sm:text-2xl font-bold text-[var(--accent-vermilion)]">
                     {project.resumeOutcome.metric}
                   </span>
-                  <span
-                    style={{
-                      fontFamily: 'var(--font-sans)',
-                      fontSize: '0.84rem',
-                      fontWeight: 600,
-                      color: 'var(--text-primary)'
-                    }}
-                  >
+                  <span className="font-sans text-xs sm:text-sm font-semibold text-[var(--text-primary)]">
                     {project.resumeOutcome.label}
                   </span>
                 </div>
-                <p
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.68rem',
-                    color: 'var(--text-tertiary)',
-                    marginTop: '0.25rem'
-                  }}
-                >
+                <p className="font-mono text-xs text-[var(--text-tertiary)] mt-1">
                   * {project.resumeOutcome.disclaimer}
                 </p>
               </div>
@@ -276,184 +125,74 @@ export const ProjectCardWide: React.FC<ProjectCardWideProps> = ({ project }) => 
         </div>
 
         {/* Right Column: Custom Conceptual Microservices Ecosystem Blueprint */}
-        <div
-          style={{
-            backgroundColor: '#FAF9F5',
-            padding: '2.5rem',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            position: 'relative'
-          }}
-          className="wide-visual-pane"
-        >
-          <div
-            style={{
-              border: '1px solid var(--border-medium)',
-              borderRadius: '6px',
-              backgroundColor: '#FFFFFF',
-              padding: '1.5rem',
-              boxShadow: 'var(--shadow-subtle)'
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid var(--border-light)',
-                paddingBottom: '0.75rem',
-                marginBottom: '1.25rem'
-              }}
-            >
-              <span className="mono-label" style={{ fontSize: '0.7rem', color: 'var(--text-primary)' }}>
+        <div className="bg-[#FAF9F5] p-6 sm:p-10 flex flex-col justify-center border-t lg:border-t-0 border-[var(--border-light)]">
+          <div className="border border-[var(--border-medium)] rounded-md bg-white p-5 sm:p-6 shadow-[var(--shadow-subtle)]">
+            <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-3 mb-5">
+              <span className="mono-label text-xs text-[var(--text-primary)] font-semibold">
                 ARCHITECTURE // MICROSERVICES TOPOLOGY
               </span>
-              <span
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.68rem',
-                  color: 'var(--accent-green)'
-                }}
-              >
-                <ShieldCheck size={12} />
+              <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[var(--accent-green)] font-medium">
+                <ShieldCheck size={13} />
                 JWT AUTH VERIFIED
               </span>
             </div>
 
             {/* Microservice Node Matrix */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '0.75rem',
-                marginBottom: '1.25rem'
-              }}
-            >
-              <div
-                style={{
-                  padding: '0.85rem',
-                  borderRadius: '4px',
-                  backgroundColor: 'var(--bg-subtle)',
-                  border: '1px solid var(--border-light)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-                  <ShoppingBag size={14} color="var(--accent-vermilion)" />
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>E-Commerce Catalog</span>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+              <div className="p-3 rounded bg-[var(--bg-subtle)] border border-[var(--border-light)] hover:border-[var(--border-strong)] transition-colors">
+                <div className="flex items-center gap-2 mb-1">
+                  <ShoppingBag size={14} className="text-[var(--accent-vermilion)]" />
+                  <span className="text-xs font-semibold text-[var(--text-primary)]">E-Commerce Catalog</span>
                 </div>
-                <span className="mono-label" style={{ fontSize: '0.65rem' }}>Product & Inventory Service</span>
+                <span className="mono-label text-[0.68rem] text-[var(--text-tertiary)]">Product & Inventory Service</span>
               </div>
 
-              <div
-                style={{
-                  padding: '0.85rem',
-                  borderRadius: '4px',
-                  backgroundColor: 'var(--bg-subtle)',
-                  border: '1px solid var(--border-light)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-                  <Plane size={14} color="var(--accent-blue)" />
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Flight & Travel Bookings</span>
+              <div className="p-3 rounded bg-[var(--bg-subtle)] border border-[var(--border-light)] hover:border-[var(--border-strong)] transition-colors">
+                <div className="flex items-center gap-2 mb-1">
+                  <Plane size={14} className="text-[var(--accent-blue)]" />
+                  <span className="text-xs font-semibold text-[var(--text-primary)]">Flight & Travel Bookings</span>
                 </div>
-                <span className="mono-label" style={{ fontSize: '0.65rem' }}>External API Orchestration</span>
+                <span className="mono-label text-[0.68rem] text-[var(--text-tertiary)]">External API Orchestration</span>
               </div>
 
-              <div
-                style={{
-                  padding: '0.85rem',
-                  borderRadius: '4px',
-                  backgroundColor: 'var(--bg-subtle)',
-                  border: '1px solid var(--border-light)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-                  <Hotel size={14} color="var(--accent-amber)" />
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>Hotel Reservations</span>
+              <div className="p-3 rounded bg-[var(--bg-subtle)] border border-[var(--border-light)] hover:border-[var(--border-strong)] transition-colors">
+                <div className="flex items-center gap-2 mb-1">
+                  <Hotel size={14} className="text-[var(--accent-amber)]" />
+                  <span className="text-xs font-semibold text-[var(--text-primary)]">Hotel Reservations</span>
                 </div>
-                <span className="mono-label" style={{ fontSize: '0.65rem' }}>Room Availability Engine</span>
+                <span className="mono-label text-[0.68rem] text-[var(--text-tertiary)]">Room Availability Engine</span>
               </div>
 
-              <div
-                style={{
-                  padding: '0.85rem',
-                  borderRadius: '4px',
-                  backgroundColor: 'var(--bg-subtle)',
-                  border: '1px solid var(--border-light)'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.35rem' }}>
-                  <Smartphone size={14} color="var(--accent-green)" />
-                  <span style={{ fontSize: '0.8rem', fontWeight: 600 }}>eSIM & Gift Cards</span>
+              <div className="p-3 rounded bg-[var(--bg-subtle)] border border-[var(--border-light)] hover:border-[var(--border-strong)] transition-colors">
+                <div className="flex items-center gap-2 mb-1">
+                  <Smartphone size={14} className="text-[var(--accent-green)]" />
+                  <span className="text-xs font-semibold text-[var(--text-primary)]">eSIM & Gift Cards</span>
                 </div>
-                <span className="mono-label" style={{ fontSize: '0.65rem' }}>Automated Provisioning API</span>
+                <span className="mono-label text-[0.68rem] text-[var(--text-tertiary)]">Automated Provisioning API</span>
               </div>
             </div>
 
             {/* Central Persistence & Payment Hub */}
-            <div
-              style={{
-                padding: '1rem',
-                borderRadius: '4px',
-                backgroundColor: '#20211F',
-                color: '#FFFFFF',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                border: '1px solid #363833'
-              }}
-            >
+            <div className="p-4 rounded bg-[#20211F] text-white flex items-center justify-between border border-[#363833]">
               <div>
-                <span className="mono-label" style={{ color: '#E5533D', fontSize: '0.68rem', display: 'block' }}>
+                <span className="mono-label text-[#E5533D] text-[0.68rem] block mb-0.5">
                   SHARED TRANSACTION DATA BUS
                 </span>
-                <span style={{ fontSize: '0.86rem', fontWeight: 600 }}>
+                <span className="text-sm font-semibold text-[#F8F7F2]">
                   PostgreSQL Relational Storage + Express.js API Gateway
                 </span>
               </div>
-              <CreditCard size={18} color="#DEDED6" />
+              <CreditCard size={18} className="text-[#DEDED6] shrink-0 ml-2" />
             </div>
 
             {/* Admin Console Annotation */}
-            <div
-              style={{
-                marginTop: '1rem',
-                paddingTop: '0.75rem',
-                borderTop: '1px dashed var(--border-medium)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.7rem',
-                color: 'var(--text-tertiary)'
-              }}
-            >
+            <div className="mt-4 pt-3 border-t border-dashed border-[var(--border-medium)] flex items-center justify-between font-mono text-xs text-[var(--text-tertiary)]">
               <span>OPERATOR CONSOLE: Multi-Vendor Auditing</span>
-              <span style={{ color: 'var(--accent-vermilion)' }}>ROLE-BASED RBAC</span>
+              <span className="text-[var(--accent-vermilion)] font-medium">ROLE-BASED RBAC</span>
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .wide-grid {
-            grid-template-columns: 1fr !important;
-          }
-          .wide-content-pane {
-            border-right: none !important;
-            border-bottom: 1px solid var(--border-light) !important;
-            padding: 1.5rem !important;
-          }
-          .wide-visual-pane {
-            padding: 1.5rem !important;
-          }
-        }
-      `}</style>
     </article>
   );
 };

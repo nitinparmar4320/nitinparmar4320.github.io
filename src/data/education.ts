@@ -1,4 +1,4 @@
-import type { EducationData } from '../types';
+import type { EducationData } from '@/types';
 
 export const educationData: EducationData = {
   degree: 'Bachelor of Engineering in Information Technology',

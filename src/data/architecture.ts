@@ -1,4 +1,4 @@
-import type { ArchitectureNode } from '../types';
+import type { ArchitectureNode } from '@/types';
 
 export const architectureLayers: ArchitectureNode[] = [
   {

@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Header } from './components/common/Header';
-import { Hero } from './components/hero/Hero';
-import { ProjectsSection } from './components/projects/ProjectsSection';
-import { AboutSection } from './components/about/AboutSection';
-import { ExperienceSection } from './components/experience/ExperienceSection';
-import { SkillsSection } from './components/skills/SkillsSection';
-import { EducationSection } from './components/education/EducationSection';
-import { ContactSection } from './components/contact/ContactSection';
-import { Footer } from './components/common/Footer';
-import { Toast } from './components/common/Toast';
-import './styles/globals.css';
+'use client';
 
-export const App: React.FC = () => {
+import React, { useState, useEffect } from 'react';
+import { Header } from '@/components/common/Header';
+import { Hero } from '@/components/hero/Hero';
+import { ProjectsSection } from '@/components/projects/ProjectsSection';
+import { AboutSection } from '@/components/about/AboutSection';
+import { ExperienceSection } from '@/components/experience/ExperienceSection';
+import { SkillsSection } from '@/components/skills/SkillsSection';
+import { EducationSection } from '@/components/education/EducationSection';
+import { ContactSection } from '@/components/contact/ContactSection';
+import { Footer } from '@/components/common/Footer';
+import { Toast } from '@/components/common/Toast';
+
+export default function Home() {
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [toastMessage, setToastMessage] = useState<string>('');
   const [isToastVisible, setIsToastVisible] = useState<boolean>(false);
@@ -46,35 +47,35 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="portfolio-app" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="portfolio-app min-h-screen flex flex-col bg-[var(--bg-primary)]">
       {/* Sticky Top Navigation */}
       <Header activeSection={activeSection} />
 
       {/* Main Single Page Document */}
-      <main id="main-content" role="main" style={{ flex: 1 }}>
-        {/* Section B: Hero with System Architecture Visualizer */}
+      <main id="main-content" role="main" className="flex-1">
+        {/* Section 00: Hero with System Architecture Visualizer */}
         <Hero />
 
-        {/* Section C: Selected Work / Projects */}
+        {/* Section 01: Selected Work / Projects */}
         <ProjectsSection />
 
-        {/* Section D: About Me */}
+        {/* Section 02: About Me */}
         <AboutSection />
 
-        {/* Section E: Professional Experience */}
+        {/* Section 03: Professional Experience */}
         <ExperienceSection />
 
-        {/* Section F: Technical Skills */}
+        {/* Section 04: Technical Skills */}
         <SkillsSection />
 
-        {/* Section G: Education */}
+        {/* Section 05: Education */}
         <EducationSection />
 
-        {/* Section H: Contact Section */}
+        {/* Section 06: Contact Section */}
         <ContactSection onCopyEmail={handleCopyEmail} />
       </main>
 
-      {/* Section I: Minimalist Footer */}
+      {/* Minimalist Editorial Footer */}
       <Footer />
 
       {/* Feedback Toast */}
@@ -85,6 +86,4 @@ export const App: React.FC = () => {
       />
     </div>
   );
-};
-
-export default App;
+}

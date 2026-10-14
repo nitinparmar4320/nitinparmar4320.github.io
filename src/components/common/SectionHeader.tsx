@@ -18,78 +18,40 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
   extraContent
 }) => {
   return (
-    <div
-      style={{
-        marginBottom: 'var(--space-3xl)',
-        borderBottom: '1px solid var(--border-medium)',
-        paddingBottom: 'var(--space-xl)'
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginBottom: 'var(--space-sm)'
-        }}
-      >
+    <div className="mb-12 md:mb-16 border-b border-[var(--border-medium)] pb-8">
+      {/* Top Tag & SYS.SPEC */}
+      <div className="flex items-center justify-between mb-3">
         <span className="mono-label">
-          <span style={{ color: 'var(--accent-vermilion)' }}>[{index}]</span> // {tag}
+          <span className="text-[var(--accent-vermilion)]">[{index}]</span> // {tag}
         </span>
-        <span className="mono-label" style={{ opacity: 0.75 }}>
+        <span className="mono-label opacity-75">
           SYS.SPEC // 2026
         </span>
       </div>
 
+      {/* Main Heading & Subtitle Grid */}
       <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: alignment === 'split' ? 'minmax(300px, 1.4fr) minmax(240px, 1fr)' : '1fr',
-          gap: 'var(--space-xl)',
-          alignItems: 'flex-end'
-        }}
-        className="section-header-grid"
+        className={`grid gap-6 md:gap-8 items-end ${
+          alignment === 'split' ? 'grid-cols-1 md:grid-cols-[minmax(300px,1.4fr)_minmax(240px,1fr)]' : 'grid-cols-1'
+        }`}
       >
         <div>
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 3.8vw, 3.25rem)',
-              lineHeight: 1.1,
-              letterSpacing: '-0.02em',
-              fontWeight: 500,
-              color: 'var(--text-primary)'
-            }}
-          >
+          <h2 className="text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.1] tracking-[-0.02em] font-medium text-[var(--text-primary)]">
             {title}
           </h2>
         </div>
 
         {(subtitle || extraContent) && (
-          <div style={{ paddingBottom: '0.25rem' }}>
+          <div className="pb-1">
             {subtitle && (
-              <p
-                style={{
-                  fontSize: 'clamp(0.95rem, 1.15vw, 1.05rem)',
-                  lineHeight: 1.65,
-                  color: 'var(--text-secondary)'
-                }}
-              >
+              <p className="text-base sm:text-lg leading-relaxed text-[var(--text-secondary)]">
                 {subtitle}
               </p>
             )}
-            {extraContent && <div style={{ marginTop: 'var(--space-sm)' }}>{extraContent}</div>}
+            {extraContent && <div className="mt-3">{extraContent}</div>}
           </div>
         )}
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .section-header-grid {
-            grid-template-columns: 1fr !important;
-            gap: var(--space-md) !important;
-          }
-        }
-      `}</style>
     </div>
   );
 };

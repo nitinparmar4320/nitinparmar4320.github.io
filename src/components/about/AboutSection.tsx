@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { SectionHeader } from '../common/SectionHeader';
 import { MapPin, Clock, Code2, Server, CheckCircle } from 'lucide-react';
@@ -37,46 +39,16 @@ export const AboutSection: React.FC = () => {
         />
 
         {/* Editorial Profile Layout */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'minmax(320px, 1.25fr) minmax(320px, 1fr)',
-            gap: 'var(--space-3xl)',
-            alignItems: 'start'
-          }}
-          className="about-grid"
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.25fr)_minmax(320px,1fr)] gap-12 lg:gap-16 items-start">
           {/* Left Column: Editorial Manifesto & Content */}
           <div>
             {/* Large Editorial Pull Quote */}
-            <blockquote
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: 'clamp(1.5rem, 2.2vw, 2.05rem)',
-                lineHeight: 1.35,
-                color: 'var(--text-primary)',
-                fontStyle: 'italic',
-                fontWeight: 400,
-                marginBottom: '2rem',
-                borderLeft: '3px solid var(--accent-vermilion)',
-                paddingLeft: '1.5rem'
-              }}
-            >
+            <blockquote className="font-display text-2xl sm:text-3xl leading-snug text-[var(--text-primary)] italic font-normal mb-8 border-l-4 border-l-[var(--accent-vermilion)] pl-6">
               “I enjoy solving practical engineering problems, organizing complex functionality into maintainable modules, and building interfaces that make sophisticated systems easier to use.”
             </blockquote>
 
-            {/* Narrative Body Copy (Exact supplied text) */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '1.25rem',
-                fontSize: '1.05rem',
-                lineHeight: 1.7,
-                color: 'var(--text-secondary)',
-                marginBottom: '2.5rem'
-              }}
-            >
+            {/* Narrative Body Copy */}
+            <div className="flex flex-col gap-5 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] mb-10">
               <p>
                 I'm a Full Stack Developer with over three years of experience developing web applications across frontend interfaces, backend APIs, database systems, and third-party integrations.
               </p>
@@ -86,31 +58,23 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Core Architectural Pillars */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                gap: '1rem',
-                borderTop: '1px solid var(--border-medium)',
-                paddingTop: '1.5rem'
-              }}
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-[var(--border-medium)] pt-6">
               <div>
-                <span className="mono-label" style={{ color: 'var(--accent-vermilion)', marginBottom: '0.35rem', display: 'flex' }}>
+                <span className="mono-label text-[var(--accent-vermilion)] mb-1.5 flex items-center gap-1.5 font-semibold">
                   <Code2 size={13} />
                   01. FRONTEND CRAFT
                 </span>
-                <p style={{ fontSize: '0.85rem', lineHeight: 1.5 }}>
+                <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
                   Deterministic client state, strict TypeScript interfaces, responsive layouts, and accessible interaction states.
                 </p>
               </div>
 
               <div>
-                <span className="mono-label" style={{ color: 'var(--accent-blue)', marginBottom: '0.35rem', display: 'flex' }}>
+                <span className="mono-label text-[var(--accent-blue)] mb-1.5 flex items-center gap-1.5 font-semibold">
                   <Server size={13} />
                   02. BACKEND RESILIENCE
                 </span>
-                <p style={{ fontSize: '0.85rem', lineHeight: 1.5 }}>
+                <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
                   Decoupled microservice boundaries, ACID-compliant schema design, structured logging, and verified API contracts.
                 </p>
               </div>
@@ -118,89 +82,47 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Right Column: Editorial Location & Technical Identity Card */}
-          <div
-            style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid var(--border-medium)',
-              borderRadius: '6px',
-              padding: '2rem',
-              boxShadow: 'var(--shadow-card)',
-              position: 'relative'
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                borderBottom: '1px solid var(--border-light)',
-                paddingBottom: '1rem',
-                marginBottom: '1.5rem'
-              }}
-            >
-              <span className="mono-label" style={{ color: 'var(--text-primary)', fontWeight: 600 }}>
+          <div className="bg-white border border-[var(--border-medium)] rounded-md p-6 sm:p-8 shadow-[var(--shadow-card)] relative">
+            <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-4 mb-6">
+              <span className="mono-label text-[var(--text-primary)] font-semibold text-xs tracking-wider">
                 OPERATIONAL BASE // METRICS
               </span>
-              <span className="mono-label" style={{ color: 'var(--accent-vermilion)' }}>
+              <span className="mono-label text-[var(--accent-vermilion)] text-xs font-semibold">
                 DEV PROFILE
               </span>
             </div>
 
             {/* Location & Time Stamp */}
-            <div
-              style={{
-                backgroundColor: 'var(--bg-subtle)',
-                border: '1px solid var(--border-light)',
-                borderRadius: '4px',
-                padding: '1.25rem',
-                marginBottom: '1.5rem'
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.5rem' }}>
-                <MapPin size={18} color="var(--accent-vermilion)" />
+            <div className="bg-[var(--bg-subtle)] border border-[var(--border-light)] rounded p-5 mb-6">
+              <div className="flex items-center gap-3 mb-2">
+                <MapPin size={18} className="text-[var(--accent-vermilion)] shrink-0" />
                 <div>
-                  <div style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text-primary)' }}>
+                  <div className="font-bold text-base text-[var(--text-primary)]">
                     Ahmedabad, Gujarat, India
                   </div>
-                  <span className="mono-label" style={{ fontSize: '0.68rem' }}>
+                  <span className="mono-label text-xs text-[var(--text-tertiary)]">
                     COORDINATES: 23.0225° N, 72.5714° E
                   </span>
                 </div>
               </div>
 
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderTop: '1px dashed var(--border-medium)',
-                  paddingTop: '0.75rem',
-                  marginTop: '0.75rem'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', fontSize: '0.75rem', fontFamily: 'var(--font-mono)' }}>
-                  <Clock size={13} color="var(--accent-blue)" />
+              <div className="flex items-center justify-between border-t border-dashed border-[var(--border-medium)] pt-3 mt-3">
+                <div className="flex items-center gap-2 text-xs font-mono text-[var(--text-secondary)]">
+                  <Clock size={13} className="text-[var(--accent-blue)]" />
                   <span>LOCAL TIME (IST):</span>
                 </div>
-                <span
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontWeight: 700,
-                    fontSize: '0.82rem',
-                    color: 'var(--accent-vermilion)'
-                  }}
-                >
+                <span className="font-mono font-bold text-sm text-[var(--accent-vermilion)]">
                   {localTime || 'Calculating...'}
                 </span>
               </div>
             </div>
 
             {/* Scope of Engineering */}
-            <div style={{ marginBottom: '1.5rem' }}>
-              <span className="mono-label" style={{ display: 'block', marginBottom: '0.75rem', color: 'var(--text-primary)' }}>
+            <div className="mb-6">
+              <span className="mono-label block mb-3 text-[var(--text-primary)] font-semibold text-xs">
                 DOMAINS OF EXPERIENCE
               </span>
-              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              <ul className="space-y-2.5">
                 {[
                   'Multi-Service E-Commerce & Booking Platforms',
                   'Headless CMS Websites with Next.js & GraphQL',
@@ -210,15 +132,9 @@ export const AboutSection: React.FC = () => {
                 ].map((item, i) => (
                   <li
                     key={i}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.6rem',
-                      fontSize: '0.84rem',
-                      color: 'var(--text-secondary)'
-                    }}
+                    className="flex items-center gap-2.5 text-xs sm:text-sm text-[var(--text-secondary)]"
                   >
-                    <CheckCircle size={14} color="var(--accent-vermilion)" />
+                    <CheckCircle size={14} className="text-[var(--accent-vermilion)] shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -226,33 +142,13 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* Intent Badge */}
-            <div
-              style={{
-                borderTop: '1px solid var(--border-light)',
-                paddingTop: '1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.72rem',
-                color: 'var(--text-tertiary)'
-              }}
-            >
+            <div className="border-t border-[var(--border-light)] pt-4 flex items-center justify-between font-mono text-xs text-[var(--text-tertiary)]">
               <span>ENGINEERED WITH INTENT</span>
-              <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>v3.4 PRODUCTION</span>
+              <span className="text-[var(--text-primary)] font-semibold">v3.4 PRODUCTION</span>
             </div>
           </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 900px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-            gap: var(--space-2xl) !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
