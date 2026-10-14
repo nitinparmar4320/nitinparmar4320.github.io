@@ -32,11 +32,10 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
     <>
       <header
         role="banner"
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#F8F7F2] border-b border-[var(--border-medium)] ${
-          isScrolled
-            ? 'py-2.5 shadow-xs md:bg-[#F8F7F2]/95 md:backdrop-blur-md'
-            : 'py-3 md:bg-transparent md:border-transparent md:py-4'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#F8F7F2] border-b border-[var(--border-medium)] ${isScrolled
+          ? 'py-2.5 shadow-xs md:bg-[#F8F7F2]/95 md:backdrop-blur-md'
+          : 'py-3 md:bg-transparent md:border-transparent md:py-4'
+          }`}
       >
         <div className="container flex items-center justify-between">
           {/* Brand Wordmark & Monogram */}
@@ -60,9 +59,8 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
           <nav
             role="navigation"
             aria-label="Main menu"
-            className={`hidden md:flex items-center gap-7 px-5 py-1.5 rounded-full border border-[var(--border-light)] shadow-xs transition-colors ${
-              isScrolled ? 'bg-[var(--bg-subtle)]' : 'bg-white/70 backdrop-blur-xs'
-            }`}
+            className={`hidden md:flex items-center gap-7 px-5 py-1.5 rounded-full border border-[var(--border-light)] shadow-xs transition-colors ${isScrolled ? 'bg-[var(--bg-subtle)]' : 'bg-white/70 backdrop-blur-xs'
+              }`}
           >
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
@@ -70,11 +68,10 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                 <a
                   key={link.id}
                   href={link.href}
-                  className={`text-sm font-sans transition-colors relative py-1 ${
-                    isActive
-                      ? 'text-[var(--accent-vermilion)] font-semibold'
-                      : 'text-[var(--text-secondary)] font-medium hover:text-[var(--text-primary)]'
-                  }`}
+                  className={`text-sm font-sans transition-colors relative py-1 ${isActive
+                    ? 'text-[var(--accent-vermilion)] font-semibold'
+                    : 'text-[var(--text-secondary)] font-medium hover:text-[var(--text-primary)]'
+                    }`}
                 >
                   {link.label}
                   {isActive && (
@@ -143,9 +140,8 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                 key={link.id}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`font-display text-3xl flex items-baseline gap-4 no-underline ${
-                  activeSection === link.id ? 'text-[var(--accent-vermilion)] font-medium' : 'text-[var(--text-primary)]'
-                }`}
+                className={`font-display text-3xl flex items-baseline gap-4 no-underline ${activeSection === link.id ? 'text-[var(--accent-vermilion)] font-medium' : 'text-[var(--text-primary)]'
+                  }`}
               >
                 <span className="font-mono text-sm text-[var(--text-tertiary)]">
                   0{idx + 1}.
