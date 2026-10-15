@@ -13,9 +13,10 @@ import {
 
 interface ProjectCardSensorProps {
   project: Project;
+  className?: string;
 }
 
-export const ProjectCardSensor: React.FC<ProjectCardSensorProps> = ({ project }) => {
+export const ProjectCardSensor: React.FC<ProjectCardSensorProps> = ({ project, className }) => {
   // Interactive simulated sensor state
   const [temperature, setTemperature] = useState(24.4);
   const [humidity, setHumidity] = useState(58.2);
@@ -35,10 +36,10 @@ export const ProjectCardSensor: React.FC<ProjectCardSensorProps> = ({ project })
   return (
     <article
       id={project.id}
-      className="bg-white border border-[var(--border-medium)] rounded-md overflow-hidden shadow-[var(--shadow-card)] mb-12 lg:mb-16 relative"
+      className={`bg-white border border-[var(--border-medium)] rounded-md overflow-hidden shadow-[var(--shadow-card)] relative ${className ?? 'mb-12 lg:mb-16'}`}
     >
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-5 sm:px-8 border-b border-[var(--border-light)] bg-[var(--bg-subtle)] flex-wrap gap-4">
+      <div className="flex items-center justify-between p-4 sm:p-5 sm:px-8 border-b border-[var(--border-light)] bg-[var(--bg-subtle)] flex-wrap gap-4 shrink-0">
         <div className="flex items-center gap-4">
           <span className="font-display text-2xl sm:text-3xl font-bold text-[var(--accent-green)] leading-none">
             {project.number}
@@ -58,7 +59,7 @@ export const ProjectCardSensor: React.FC<ProjectCardSensorProps> = ({ project })
       </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.15fr)_minmax(320px,1fr)]">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.15fr)_minmax(320px,1fr)] flex-1 min-h-0 overflow-y-auto">
         {/* Left Column: Context, Role, and Technical Details */}
         <div className="p-6 sm:p-10 lg:border-r border-[var(--border-light)] flex flex-col justify-between">
           <div>

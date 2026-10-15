@@ -12,16 +12,17 @@ import {
 
 interface ProjectCardSplitProps {
   project: Project;
+  className?: string;
 }
 
-export const ProjectCardSplit: React.FC<ProjectCardSplitProps> = ({ project }) => {
+export const ProjectCardSplit: React.FC<ProjectCardSplitProps> = ({ project, className }) => {
   return (
     <article
       id={project.id}
-      className="bg-white border border-[var(--border-medium)] rounded-md overflow-hidden shadow-[var(--shadow-card)] mb-12 lg:mb-16 relative"
+      className={`bg-white border border-[var(--border-medium)] rounded-md overflow-hidden shadow-[var(--shadow-card)] relative ${className ?? 'mb-12 lg:mb-16'}`}
     >
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-5 sm:px-8 border-b border-[var(--border-light)] bg-[var(--bg-subtle)] flex-wrap gap-4">
+      <div className="flex items-center justify-between p-4 sm:p-5 sm:px-8 border-b border-[var(--border-light)] bg-[var(--bg-subtle)] flex-wrap gap-4 shrink-0">
         <div className="flex items-center gap-4">
           <span className="font-display text-2xl sm:text-3xl font-bold text-[var(--accent-blue)] leading-none">
             {project.number}
@@ -54,7 +55,7 @@ export const ProjectCardSplit: React.FC<ProjectCardSplitProps> = ({ project }) =
       </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1fr)_minmax(320px,1.15fr)]">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1fr)_minmax(320px,1.15fr)] flex-1 min-h-0 overflow-y-auto">
         {/* Left Column: Conceptual Architecture & Interface Mockup */}
         <div className="bg-[#FAF9F5] p-6 sm:p-10 lg:border-r border-[var(--border-light)] flex flex-col justify-center">
           {/* Headless Decoupled Architecture Graphic */}

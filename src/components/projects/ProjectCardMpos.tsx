@@ -20,11 +20,12 @@ import {
 
 interface ProjectCardMposProps {
   project: Project;
+  className?: string;
 }
 
 type MenuKey = 'products' | 'promocode' | 'grn' | 'suppliers' | 'pos' | 'stores';
 
-export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project }) => {
+export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project, className }) => {
   const [activeMenu, setActiveMenu] = useState<MenuKey>('products');
   const [productSort, setProductSort] = useState<'stock' | 'price' | 'sku'>('stock');
 
@@ -50,10 +51,10 @@ export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project }) => 
   return (
     <article
       id={project.id}
-      className="bg-white border border-[var(--border-medium)] rounded-md overflow-hidden shadow-[var(--shadow-card)] mb-12 lg:mb-16 relative"
+      className={`bg-white border border-[var(--border-medium)] rounded-md overflow-hidden shadow-[var(--shadow-card)] relative ${className ?? 'mb-12 lg:mb-16'}`}
     >
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-5 sm:px-8 border-b border-[var(--border-light)] bg-[var(--bg-subtle)] flex-wrap gap-4">
+      <div className="flex items-center justify-between p-4 sm:p-5 sm:px-8 border-b border-[var(--border-light)] bg-[var(--bg-subtle)] flex-wrap gap-4 shrink-0">
         <div className="flex items-center gap-4">
           <span className="font-display text-2xl sm:text-3xl font-bold text-[var(--accent-amber)] leading-none">
             {project.number}
@@ -73,7 +74,7 @@ export const ProjectCardMpos: React.FC<ProjectCardMposProps> = ({ project }) => 
       </div>
 
       {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.1fr)_minmax(320px,1.15fr)]">
+      <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.1fr)_minmax(320px,1.15fr)] flex-1 min-h-0 overflow-y-auto">
         {/* Left Column: Interactive 6-Menu Management Workspace */}
         <div className="bg-[#FAF9F5] p-6 sm:p-10 lg:border-r border-[var(--border-light)] flex flex-col justify-center">
           <div className="bg-white border border-[var(--border-medium)] rounded-md p-5 sm:p-6 shadow-[var(--shadow-subtle)]">

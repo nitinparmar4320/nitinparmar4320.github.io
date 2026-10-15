@@ -9,6 +9,16 @@ export interface ProjectContribution {
   detail: string;
 }
 
+export interface ProjectFeature {
+  title: string;
+  description: string;
+}
+
+export interface ProjectChallenge {
+  challenge: string;
+  solution: string;
+}
+
 export interface Project {
   id: string;
   number: string;
@@ -16,8 +26,14 @@ export interface Project {
   category: string;
   clientType?: string;
   description: string;
+  shortDescription?: string;
+  highlights?: string[];
+  roleTitle?: string;
+  timeline?: string;
   technologies: string[];
   contributions: string[];
+  challenges?: ProjectChallenge[];
+  keyFeatures?: ProjectFeature[];
   resumeOutcome?: {
     metric: string;
     label: string;
