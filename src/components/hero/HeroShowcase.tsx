@@ -229,12 +229,13 @@ export const HeroShowcase: React.FC = () => {
               {/* Interactive Image Frame */}
               <div
                 id="hero-portrait-frame"
+                data-cursor-event="true"
                 ref={portraitContainerRef}
                 style={{ position: 'relative', zIndex: 20 }}
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[320px] lg:max-w-[380px] xl:max-w-[440px] 2xl:max-w-[480px] -mt-4 sm:-mt-14 md:-mt-8 xl:mt-0 md:cursor-crosshair cursor-default select-none group"
+                className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-[320px] lg:max-w-[380px] xl:max-w-[440px] 2xl:min-w-[580px] -mt-4 sm:-mt-14 md:-mt-8 xl:mt-0 md:cursor-crosshair cursor-default select-none group"
               >
                 {/* Soft Silhouette Mask */}
                 <div

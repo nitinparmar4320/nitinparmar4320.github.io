@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Newsreader, JetBrains_Mono } from "next/font/google";
+import { GlobalCursorTrail } from "@/components/common/GlobalCursorTrail";
 import "./globals.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -165,6 +166,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col font-sans bg-[var(--bg-primary)] text-[var(--text-primary)] relative">
+        <GlobalCursorTrail />
         {children}
       </body>
     </html>

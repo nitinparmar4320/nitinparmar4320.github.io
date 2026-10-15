@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Monogram } from './Monogram';
 import { LuArrowUpRight as ArrowUpRight, LuMenu as Menu, LuX as X } from 'react-icons/lu';
 
@@ -11,6 +13,8 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,11 +25,11 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
   }, []);
 
   const navLinks = [
-    { label: 'About', href: '#about', id: 'about' },
-    { label: 'Experience', href: '#experience', id: 'experience' },
-    { label: 'Projects', href: '#projects', id: 'projects' },
-    { label: 'Skills', href: '#skills', id: 'skills' },
-    { label: 'Contact', href: '#contact', id: 'contact' },
+    { label: 'About', href: isHomePage ? '#about' : '/#about', id: 'about' },
+    { label: 'Experience', href: isHomePage ? '#experience' : '/#experience', id: 'experience' },
+    { label: 'Projects', href: isHomePage ? '#projects' : '/projects', id: 'projects' },
+    { label: 'Skills', href: isHomePage ? '#skills' : '/#skills', id: 'skills' },
+    { label: 'Contact', href: isHomePage ? '#contact' : '/#contact', id: 'contact' },
   ];
 
   return (
@@ -39,8 +43,8 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
       >
         <div className="container flex items-center justify-between">
           {/* Brand Wordmark & Monogram */}
-          <a
-            href="#hero"
+          <Link
+            href={isHomePage ? '#hero' : '/'}
             aria-label="Nitin Parmar — Return to top"
             className="flex items-center gap-3.5 no-underline group"
           >
@@ -53,7 +57,7 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
                 Full Stack Developer
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links */}
           <nav
