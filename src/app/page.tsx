@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/common/Header';
-import { Hero } from '@/components/hero/Hero';
+// Hero.tsx is preserved as backup; using HeroShowcase for the new design
+import { HeroShowcase } from '@/components/hero/HeroShowcase';
 import { ProjectsSection } from '@/components/projects/ProjectsSection';
 import { AboutSection } from '@/components/about/AboutSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
@@ -53,8 +54,8 @@ export default function Home() {
 
       {/* Main Single Page Document */}
       <main id="main-content" role="main" className="flex-1">
-        {/* Section 00: Hero with System Architecture Visualizer */}
-        <Hero />
+        {/* Section 00: New Creative Hero with Spotlight Reveal */}
+        <HeroShowcase />
 
         {/* Section 01: Selected Work / Projects */}
         <ProjectsSection />

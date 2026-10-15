@@ -3,20 +3,20 @@
 import React, { useState } from 'react';
 import type { Project } from '@/types';
 import {
-  Check,
-  ReceiptText,
-  FileCheck,
-  Tag,
-  ShoppingCart,
-  SlidersHorizontal,
-  Package,
-  Truck,
-  Store,
-  ArrowUpDown,
-  Plus,
-  Search,
-  Building2
-} from 'lucide-react';
+  LuCheck as Check,
+  LuReceiptText as ReceiptText,
+  LuFileCheck as FileCheck,
+  LuTag as Tag,
+  LuShoppingCart as ShoppingCart,
+  LuSlidersHorizontal as SlidersHorizontal,
+  LuPackage as Package,
+  LuTruck as Truck,
+  LuStore as Store,
+  LuArrowUpDown as ArrowUpDown,
+  LuPlus as Plus,
+  LuSearch as Search,
+  LuBuilding2 as Building2,
+} from 'react-icons/lu';
 
 interface ProjectCardMposProps {
   project: Project;

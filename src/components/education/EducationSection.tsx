@@ -1,6 +1,6 @@
 import React from 'react';
 import { educationData } from '@/data/education';
-import { GraduationCap, Award, Calendar } from 'lucide-react';
+import { LuGraduationCap as GraduationCap, LuAward as Award, LuCalendar as Calendar } from 'react-icons/lu';
 
 export const EducationSection: React.FC = () => {
   return (

@@ -1,6 +1,15 @@
 import React from 'react';
 import type { Project } from '@/types';
-import { ExternalLink, Check, ShoppingBag, Plane, Hotel, Smartphone, CreditCard, ShieldCheck } from 'lucide-react';
+import {
+  LuExternalLink as ExternalLink,
+  LuCheck as Check,
+  LuShoppingBag as ShoppingBag,
+  LuPlane as Plane,
+  LuHotel as Hotel,
+  LuSmartphone as Smartphone,
+  LuCreditCard as CreditCard,
+  LuShieldCheck as ShieldCheck,
+} from 'react-icons/lu';
 
 interface ProjectCardWideProps {
   project: Project;

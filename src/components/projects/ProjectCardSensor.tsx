@@ -2,7 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import type { Project } from '@/types';
-import { Check, Radio, Bell, Droplets, Thermometer, Wind } from 'lucide-react';
+import {
+  LuCheck as Check,
+  LuRadio as Radio,
+  LuBell as Bell,
+  LuDroplets as Droplets,
+  LuThermometer as Thermometer,
+  LuWind as Wind,
+} from 'react-icons/lu';
 
 interface ProjectCardSensorProps {
   project: Project;

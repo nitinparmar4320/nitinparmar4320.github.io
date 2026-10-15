@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Monogram } from './Monogram';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { LuArrowUpRight as ArrowUpRight, LuMenu as Menu, LuX as X } from 'react-icons/lu';
 
 interface HeaderProps {
   activeSection: string;
@@ -88,14 +88,14 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse inline-block" />
               <span>Ahmedabad, IN</span>
             </div>
-
+            {/* 
             <a
               href="#contact"
               className="btn btn-primary text-xs sm:text-sm py-2 px-3.5 sm:px-4 rounded"
             >
               <span>Let's Talk</span>
               <ArrowUpRight size={14} className="btn-icon-arrow" />
-            </a>
+            </a> */}
 
             {/* Mobile Menu Toggle Button */}
             <button

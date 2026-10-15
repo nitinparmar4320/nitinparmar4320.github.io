@@ -1,7 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Copy, Check, ArrowUpRight, Send, MapPin, Sparkles } from 'lucide-react';
+import {
+  LuMail as Mail,
+  LuCopy as Copy,
+  LuCheck as Check,
+  LuArrowUpRight as ArrowUpRight,
+  LuSend as Send,
+  LuMapPin as MapPin,
+  LuSparkles as Sparkles,
+} from 'react-icons/lu';
 import { LinkedinIcon, GithubIcon } from '../common/SocialIcons';
 
 interface ContactSectionProps {

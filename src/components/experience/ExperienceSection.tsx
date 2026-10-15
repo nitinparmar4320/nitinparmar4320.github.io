@@ -1,7 +1,7 @@
 import React from 'react';
 import { SectionHeader } from '../common/SectionHeader';
 import { experienceData } from '@/data/experience';
-import { Briefcase, Calendar, MapPin, Sparkles } from 'lucide-react';
+import { LuBriefcase as Briefcase, LuCalendar as Calendar, LuMapPin as MapPin, LuSparkles as Sparkles } from 'react-icons/lu';
 
 export const ExperienceSection: React.FC = () => {
   return (
