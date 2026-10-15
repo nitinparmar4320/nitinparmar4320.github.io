@@ -3,7 +3,14 @@
 import React, { useState } from 'react';
 import { SectionHeader } from '../common/SectionHeader';
 import { skillsData } from '@/data/skills';
-import { Code2, Server, Database, Network, Radio, Cloud } from 'lucide-react';
+import {
+  LuCodeXml as Code2,
+  LuServer as Server,
+  LuDatabase as Database,
+  LuNetwork as Network,
+  LuRadio as Radio,
+  LuCloud as Cloud,
+} from 'react-icons/lu';
 
 export const SkillsSection: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState<string>('all');

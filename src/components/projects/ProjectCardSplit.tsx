@@ -1,6 +1,14 @@
 import React from 'react';
 import type { Project } from '@/types';
-import { ExternalLink, Check, Network, Users, LayoutDashboard, Zap, GitBranch } from 'lucide-react';
+import {
+  LuExternalLink as ExternalLink,
+  LuCheck as Check,
+  LuNetwork as Network,
+  LuUsers as Users,
+  LuLayoutDashboard as LayoutDashboard,
+  LuZap as Zap,
+  LuGitBranch as GitBranch,
+} from 'react-icons/lu';
 
 interface ProjectCardSplitProps {
   project: Project;

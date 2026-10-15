@@ -5,7 +5,7 @@ import { ProjectCardSplit } from './ProjectCardSplit';
 import { ProjectCardSensor } from './ProjectCardSensor';
 import { ProjectCardMpos } from './ProjectCardMpos';
 import { projectsData } from '@/data/projects';
-import { Layers } from 'lucide-react';
+import { LuLayers as Layers } from 'react-icons/lu';
 
 export const ProjectsSection: React.FC = () => {
   const shoppingate = projectsData.find((p) => p.id === 'shoppingate')!;

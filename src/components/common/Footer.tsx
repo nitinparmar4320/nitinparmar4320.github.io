@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Monogram } from './Monogram';
-import { ArrowUp, Mail } from 'lucide-react';
+import { LuArrowUp as ArrowUp, LuMail as Mail } from 'react-icons/lu';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 
 export const Footer: React.FC = () => {

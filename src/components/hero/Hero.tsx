@@ -2,7 +2,12 @@
 
 import React from 'react';
 import { SystemArchitectureVisualizer } from './SystemArchitectureVisualizer';
-import { ArrowDown, ArrowUpRight, MapPin, Terminal } from 'lucide-react';
+import {
+  LuArrowDown as ArrowDown,
+  LuArrowUpRight as ArrowUpRight,
+  LuMapPin as MapPin,
+  LuTerminal as Terminal,
+} from 'react-icons/lu';
 
 export const Hero: React.FC = () => {
   return (

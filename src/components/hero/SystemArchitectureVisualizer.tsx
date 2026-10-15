@@ -2,7 +2,15 @@
 
 import React, { useState } from 'react';
 import { architectureLayers } from '@/data/architecture';
-import { Layers, Terminal, ArrowRight, Cpu, Database, Radio, Server } from 'lucide-react';
+import {
+  LuLayers as Layers,
+  LuTerminal as Terminal,
+  LuArrowRight as ArrowRight,
+  LuCpu as Cpu,
+  LuDatabase as Database,
+  LuRadio as Radio,
+  LuServer as Server,
+} from 'react-icons/lu';
 
 export const SystemArchitectureVisualizer: React.FC = () => {
   const [selectedLayerId, setSelectedLayerId] = useState<string>('client');

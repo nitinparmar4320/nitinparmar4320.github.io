@@ -2,7 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { SectionHeader } from '../common/SectionHeader';
-import { MapPin, Clock, Code2, Server, CheckCircle } from 'lucide-react';
+import {
+  LuMapPin as MapPin,
+  LuClock as Clock,
+  LuCodeXml as Code2,
+  LuServer as Server,
+  LuCircleCheck as CheckCircle,
+} from 'react-icons/lu';
 
 export const AboutSection: React.FC = () => {
   // Live India Standard Time (IST - UTC+5:30) display
