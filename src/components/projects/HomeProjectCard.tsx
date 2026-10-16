@@ -177,20 +177,20 @@ export const HomeProjectCard: React.FC<HomeProjectCardProps> = ({ project }) => 
 
       case 'mpos':
         return (
-          <div className="h-full rounded-md bg-[#FAF9F5] border border-[var(--border-medium)] p-4 sm:p-5 flex flex-col justify-between shadow-xs">
-            <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-2.5 mb-3">
+          <div className="h-full rounded-md bg-[#FAF9F5] border border-[var(--border-medium)] p-3.5 sm:p-4 flex flex-col justify-between shadow-xs">
+            <div className="flex items-center justify-between border-b border-[var(--border-light)] pb-2 mb-2.5">
               <span className="mono-label text-[0.7rem] text-[var(--text-primary)] font-semibold">
                 OPERATIONAL RETAIL WORKSPACE
               </span>
-              <span className="mono-tag text-[0.65rem] bg-amber-500/10 text-[var(--accent-amber)] border-amber-500/20">
+              <span className="mono-tag text-[0.62rem] py-0.5 px-2 bg-amber-500/10 text-[var(--accent-amber)] border-amber-500/20">
                 6 MODULES INTEGRATED
               </span>
             </div>
 
-            <div className="grid grid-cols-3 gap-2 mb-3">
+            <div className="grid grid-cols-3 gap-2 mb-2.5">
               <div className="p-2 rounded bg-white border border-[var(--border-light)] flex items-center gap-1.5">
                 <Package size={13} className="text-[var(--accent-amber)] shrink-0" />
-                <span className="text-xs font-semibold text-[var(--text-primary)] truncate">Catalog</span>
+                <span className="text-xs font-semibold text-[var(--text-primary)] truncate">Catalog CRUD</span>
               </div>
               <div className="p-2 rounded bg-white border border-[var(--border-light)] flex items-center gap-1.5">
                 <FileCheck size={13} className="text-[var(--accent-amber)] shrink-0" />
@@ -202,12 +202,12 @@ export const HomeProjectCard: React.FC<HomeProjectCardProps> = ({ project }) => 
               </div>
             </div>
 
-            <div className="p-3 rounded bg-white border border-[var(--border-light)]">
+            <div className="p-2.5 sm:p-3 rounded bg-white border border-[var(--border-light)]">
               <div className="flex items-center justify-between text-xs font-semibold text-[var(--text-primary)] mb-1">
                 <span>SKU Stock & Reconciliation</span>
-                <span className="mono-label text-[0.68rem] text-[var(--accent-green)]">Sync 3 Outlets</span>
+                <span className="mono-label text-[0.65rem] text-[var(--accent-green)] font-semibold">Sync 3 Outlets</span>
               </div>
-              <div className="flex items-center justify-between text-[0.7rem] font-mono text-[var(--text-tertiary)] pt-1 border-t border-[var(--border-light)]">
+              <div className="flex items-center justify-between text-[0.68rem] font-mono text-[var(--text-tertiary)] pt-1 border-t border-[var(--border-light)]">
                 <span>Promocode Discount Matrix</span>
                 <span className="text-[var(--text-primary)] font-semibold">Deterministic RBAC</span>
               </div>
@@ -262,23 +262,23 @@ export const HomeProjectCard: React.FC<HomeProjectCardProps> = ({ project }) => 
       </div>
 
       {/* ================= MAIN HIGHLIGHTED STAGE (NO SCROLL REQUIRED) ================= */}
-      <div className="p-5 sm:p-7 md:p-8 flex-1 grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-6 lg:gap-8 items-center min-h-0">
+      <div className="px-5 sm:px-7 md:px-8 py-3.5 sm:py-4 md:py-5 flex-1 grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-5 lg:gap-8 items-center min-h-0 overflow-hidden">
         
         {/* Left Column: Short, High-Impact Content */}
         <div className="flex flex-col justify-center min-h-0">
-          <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-2.5 tracking-tight font-display">
+          <h3 className="text-2xl sm:text-3xl font-bold text-[var(--text-primary)] mb-1.5 tracking-tight font-display">
             {project.title}
           </h3>
 
-          <p className="text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed mb-4">
+          <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed mb-3 line-clamp-2">
             {project.shortDescription || project.description}
           </p>
 
           {/* Outcome Metric Callout */}
           {project.resumeOutcome && (
-            <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded bg-[var(--bg-subtle)] border border-[var(--border-light)] mb-4">
+            <div className="flex items-center gap-3 p-2 sm:p-2.5 rounded bg-[var(--bg-subtle)] border border-[var(--border-light)] mb-3">
               <span
-                className="font-display text-xl sm:text-2xl font-bold leading-none shrink-0"
+                className="font-display text-lg sm:text-xl font-bold leading-none shrink-0"
                 style={{ color: project.accentColor || 'var(--accent-vermilion)' }}
               >
                 {project.resumeOutcome.metric}
@@ -290,37 +290,37 @@ export const HomeProjectCard: React.FC<HomeProjectCardProps> = ({ project }) => 
           )}
 
           {/* Key Bullet Highlights (Max 3 concise points) */}
-          <ul className="space-y-1.5 mb-4">
-            {(project.highlights || project.contributions.slice(0, 3)).map((item, idx) => (
-              <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[var(--text-secondary)] leading-snug">
+          <ul className="space-y-1 sm:space-y-1.5 mb-3">
+            {(project.highlights || project.contributions.slice(0, 3)).slice(0, 3).map((item, idx) => (
+              <li key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-[var(--text-secondary)] leading-snug">
                 <span
                   className="mt-0.5 flex items-center justify-center w-3.5 h-3.5 rounded-full bg-white border border-[var(--border-medium)] shrink-0"
                   style={{ color: project.accentColor || 'var(--accent-vermilion)' }}
                 >
                   <Check size={9} />
                 </span>
-                <span className="line-clamp-2">{item}</span>
+                <span className="line-clamp-1 sm:line-clamp-2">{item}</span>
               </li>
             ))}
           </ul>
 
           {/* Primary Technologies */}
-          <div className="flex flex-wrap gap-1.5">
-            {project.technologies.slice(0, 5).map((tech) => (
-              <span key={tech} className="mono-tag text-[0.68rem] py-0.5 px-2">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {project.technologies.slice(0, 4).map((tech) => (
+              <span key={tech} className="mono-tag text-[0.65rem] sm:text-[0.68rem] py-0.5 px-2">
                 {tech}
               </span>
             ))}
-            {project.technologies.length > 5 && (
-              <span className="mono-label text-[0.65rem] text-[var(--text-tertiary)] self-center ml-1">
-                +{project.technologies.length - 5} more
+            {project.technologies.length > 4 && (
+              <span className="mono-label text-[0.62rem] sm:text-[0.65rem] text-[var(--text-tertiary)] ml-1">
+                +{project.technologies.length - 4} more
               </span>
             )}
           </div>
         </div>
 
         {/* Right Column: Visual Preview Graphic Teaser */}
-        <div className="hidden lg:block h-full min-h-[220px]">
+        <div className="hidden lg:block h-full min-h-[200px]">
           {renderVisualTeaser()}
         </div>
       </div>

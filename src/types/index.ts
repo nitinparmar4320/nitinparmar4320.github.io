@@ -52,6 +52,8 @@ export interface ExperienceItem {
   isCurrent?: boolean;
   location?: string;
   verifiedDetailsNote?: string;
+  technologies?: string[];
+  highlights?: string[];
 }
 
 export interface SkillCategory {
