@@ -219,27 +219,25 @@ export const projectsData: Project[] = [
   {
     id: 'mpos',
     number: '04',
-    title: 'MPOS',
-    category: 'Point-of-sale administration & multi-store inventory',
+    title: 'MPOS Suite',
+    category: 'Retail POS & Multi-Store Inventory',
     shortDescription:
-      'Comprehensive retail POS suite governing product catalogs, Goods Received Note (GRN) inbound reconciliation, promocode matrix engines, and multi-outlet sync.',
+      'Comprehensive retail POS platform managing product catalogs, inbound GRN reconciliation, dynamic promocodes, and multi-outlet stock sync.',
     description:
       'A comprehensive point-of-sale administration platform engineered to control 6 core operational workflows: product cataloging (CRUD creation, dynamic sorting, and stock management), promocode engines, Goods Received Note (GRN) logistics, supplier relationships, POS terminal customizations, and multi-store management.',
     roleTitle: 'Frontend & System Workflow Engineer',
     timeline: 'Enterprise Retail Deployment',
     highlights: [
-      '6 full operational modules: Product Catalog CRUD, Promocodes, GRN, Suppliers, POS, and Stores',
-      'Digitized Goods Received Note (GRN) workflow verifying physical deliveries against PO invoices',
-      'Multi-store catalog and stock synchronizer supporting 20+ active retail administrators'
+      '6 operational modules: Product Catalog CRUD, Promocodes, GRN, Suppliers, POS & Stores',
+      'Digitized Goods Received Note (GRN) workflow matching deliveries against PO invoices',
+      'Real-time multi-store inventory synchronizer serving 20+ active retail administrators'
     ],
     technologies: [
       'React.js',
-      'JavaScript (ES6+)',
+      'REST APIs',
       'State Management',
       'Component Architecture',
-      'REST APIs',
       'Multi-Store Inventory',
-      'Data Tables & Sorting',
       'Form Validation'
     ],
     contributions: [
