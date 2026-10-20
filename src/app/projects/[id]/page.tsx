@@ -22,7 +22,6 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export const instant = false;
 
 export async function generateStaticParams() {
   return projectsData.map((project) => ({

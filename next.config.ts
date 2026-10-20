@@ -1,10 +1,14 @@
 import type { NextConfig } from "next";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || process.env.BASE_PATH || '';
+
 const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
-  cacheComponents: true,
-  partialPrefetching: true,
+  basePath: basePath ? basePath : undefined,
+  images: {
+    unoptimized: true,
+  },
   turbopack: {
     rules: {
       "*.css": {
