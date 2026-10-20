@@ -5,6 +5,7 @@ export const dynamic = 'force-static';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://nitinparmar.dev';
 
+
   return [
     {
       url: baseUrl,
