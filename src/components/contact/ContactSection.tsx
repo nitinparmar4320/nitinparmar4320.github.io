@@ -131,10 +131,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                     <LinkedinIcon size={20} color="var(--accent-blue)" />
                     <div>
                       <span className="mono-label text-[0.65rem] block mb-0.5">
-                        PROFESSIONAL NETWORK
+                        PROFESSIONAL NETWORK:
                       </span>
                       <span className="text-sm font-semibold text-[var(--text-primary)]">
-                        LinkedIn Profile
+                        {' LinkedIn Profile'}
                       </span>
                     </div>
                   </div>
@@ -152,10 +152,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onCopyEmail }) =
                     <GithubIcon size={20} color="var(--text-primary)" />
                     <div>
                       <span className="mono-label text-[0.65rem] block mb-0.5">
-                        CODE REPOSITORIES
+                        CODE REPOSITORIES:
                       </span>
                       <span className="text-sm font-semibold text-[var(--text-primary)]">
-                        GitHub Profile
+                        {' GitHub Profile'}
                       </span>
                     </div>
                   </div>

@@ -25,9 +25,9 @@ export const Header: React.FC<HeaderProps> = ({ activeSection }) => {
   }, []);
 
   const navLinks = [
+    { label: 'Projects', href: isHomePage ? '#projects' : '/projects', id: 'projects' },
     { label: 'About', href: isHomePage ? '#about' : '/#about', id: 'about' },
     { label: 'Experience', href: isHomePage ? '#experience' : '/#experience', id: 'experience' },
-    { label: 'Projects', href: isHomePage ? '#projects' : '/projects', id: 'projects' },
     { label: 'Skills', href: isHomePage ? '#skills' : '/#skills', id: 'skills' },
     { label: 'Contact', href: isHomePage ? '#contact' : '/#contact', id: 'contact' },
   ];
