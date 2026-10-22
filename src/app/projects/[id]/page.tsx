@@ -65,7 +65,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
       {/* Main Container */}
       <main id="main-content" className="flex-1 pt-28 sm:pt-32 pb-20">
         <div className="container max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Breadcrumb Navigation */}
           <div className="flex items-center justify-between pb-6 mb-6 border-b border-[var(--border-light)] flex-wrap gap-3">
             <div className="flex items-center gap-2 text-xs font-mono text-[var(--text-tertiary)]">

@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/common/Header';
-// Hero.tsx is preserved as backup; using HeroShowcase for the new design
-import { HeroShowcase } from '@/components/hero/HeroShowcase';
+// Previous hero designs preserved as options:
+// import { Hero } from '@/components/hero/Hero';
+// import { HeroShowcase } from '@/components/hero/HeroShowcase';
+import { HeroWorkspace } from '@/components/hero/HeroWorkspace';
 import { ProjectsSection } from '@/components/projects/ProjectsSection';
 import { AboutSection } from '@/components/about/AboutSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
@@ -54,8 +56,8 @@ export default function Home() {
 
       {/* Main Single Page Document */}
       <main id="main-content" role="main" className="flex-1">
-        {/* Section 00: New Creative Hero with Spotlight Reveal */}
-        <HeroShowcase />
+        {/* Section 00: Modern Developer Studio Workspace Hero */}
+        <HeroWorkspace />
 
         {/* Section 01: Selected Work / Projects */}
         <ProjectsSection />

@@ -27,28 +27,42 @@
 
 :root {
   /* Editorial Light Theme Palette */
-  --bg-primary: #F8F7F2;          /* Warm ivory canvas */
-  --bg-surface: #FFFFFF;          /* Pure white elevated cards */
-  --bg-subtle: #F2F1EA;           /* Muted warm parchment */
-  --bg-elevated: #EDECE4;         /* Structured panel background */
+  --bg-primary: #F8F7F2;
+  /* Warm ivory canvas */
+  --bg-surface: #FFFFFF;
+  /* Pure white elevated cards */
+  --bg-subtle: #F2F1EA;
+  /* Muted warm parchment */
+  --bg-elevated: #EDECE4;
+  /* Structured panel background */
   --bg-tint-vermilion: rgba(229, 83, 61, 0.08);
   --bg-tint-blue: rgba(82, 103, 216, 0.08);
 
-  --text-primary: #20211F;        /* Deep charcoal (near-black) */
-  --text-secondary: #63655E;      /* Muted graphite */
-  --text-tertiary: #8C8E85;       /* Subtle annotations & metadata */
+  --text-primary: #20211F;
+  /* Deep charcoal (near-black) */
+  --text-secondary: #63655E;
+  /* Muted graphite */
+  --text-tertiary: #8C8E85;
+  /* Subtle annotations & metadata */
   --text-inverted: #FFFFFF;
 
-  --accent-vermilion: #E5533D;    /* Vivid signature vermilion / coral-red */
+  --accent-vermilion: #E5533D;
+  /* Vivid signature vermilion / coral-red */
   --accent-vermilion-hover: #D04530;
-  --accent-blue: #5267D8;         /* Restrained electric blue for systems/APIs */
+  --accent-blue: #5267D8;
+  /* Restrained electric blue for systems/APIs */
   --accent-blue-hover: #4054C3;
-  --accent-green: #2E7D32;        /* Restrained telemetry green */
-  --accent-amber: #D97706;        /* Administrative amber */
+  --accent-green: #2E7D32;
+  /* Restrained telemetry green */
+  --accent-amber: #D97706;
+  /* Administrative amber */
 
-  --border-light: #E7E6DC;        /* 1px precision hairlines */
-  --border-medium: #DEDED6;       /* Soft warm gray dividers */
-  --border-strong: #BCBEB2;       /* Active / focused borders */
+  --border-light: #E7E6DC;
+  /* 1px precision hairlines */
+  --border-medium: #DEDED6;
+  /* Soft warm gray dividers */
+  --border-strong: #BCBEB2;
+  /* Active / focused borders */
   --border-accent: rgba(229, 83, 61, 0.35);
 
   --space-xxs: 0.25rem;
@@ -79,7 +93,9 @@
   --focus-ring-offset: 3px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -108,12 +124,12 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(222, 222, 214, 0.28) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(222, 222, 214, 0.28) 1px, transparent 1px);
   background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse at 50% 20%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 70%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 20%, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse at 50% 20%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 20%, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.1) 70%, transparent 100%);
   z-index: 0;
 }
 
@@ -129,7 +145,10 @@ body::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -137,7 +156,12 @@ body::before {
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-newsreader), Georgia, serif;
   font-weight: 500;
   line-height: 1.15;
@@ -155,7 +179,10 @@ a {
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
 
-code, kbd, samp, pre {
+code,
+kbd,
+samp,
+pre {
   font-family: var(--font-jetbrains), monospace;
 }
 
@@ -194,7 +221,9 @@ code, kbd, samp, pre {
     padding-top: var(--space-3xl);
     padding-bottom: var(--space-3xl);
   }
-  .container, .container-wide {
+
+  .container,
+  .container-wide {
     padding-left: var(--space-md);
     padding-right: var(--space-md);
   }
@@ -314,4 +343,104 @@ code, kbd, samp, pre {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-tertiary);
+}
+
+/* Studio Hero Dynamic Animations */
+@keyframes studioFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(0.4deg);
+  }
+}
+
+@keyframes studioFloatSlow {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(7px) rotate(-0.5deg);
+  }
+}
+
+@keyframes ambientPulseWarm {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes ambientPulseBlue {
+
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes radarPing {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes subtleShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-studio-float {
+  animation: studioFloat 5s ease-in-out infinite;
+}
+
+.animate-studio-float-slow {
+  animation: studioFloatSlow 6.5s ease-in-out infinite;
+}
+
+.animate-ambient-warm {
+  animation: ambientPulseWarm 7s ease-in-out infinite;
+}
+
+.animate-ambient-blue {
+  animation: ambientPulseBlue 8s ease-in-out infinite;
+}
+
+.animate-radar-ping {
+  animation: radarPing 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
