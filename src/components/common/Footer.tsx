@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
   return (
     <footer
       role="contentinfo"
-      className="bg-[var(--bg-primary)] border-t border-[var(--border-medium)] pt-16 pb-12 relative"
+      className="bg-transparent border-t border-[var(--border-medium)] pt-16 pb-12 relative"
     >
       <div className="container">
         {/* Top Tier */}

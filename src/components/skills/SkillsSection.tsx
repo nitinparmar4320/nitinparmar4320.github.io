@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import { motion } from 'motion/react';
 import { SectionHeader } from '../common/SectionHeader';
 import { skillsData } from '@/data/skills';
 import type { SkillCategory } from '@/types';
@@ -162,7 +163,7 @@ export const SkillsSection: React.FC = () => {
           subtitle="A structured taxonomy of verified languages, libraries, databases, and architectural patterns applied in production web environments."
         />
 
-        {/* Category Filter Tabs */}
+        {/* Category Filter Tabs with Motion layoutId */}
         <div className="flex items-center gap-2 flex-wrap mb-8 pb-4 border-b border-[var(--border-light)]">
           {filterOptions.map((opt) => {
             const isActive = selectedFilter === opt.id;
@@ -170,13 +171,23 @@ export const SkillsSection: React.FC = () => {
               <button
                 key={opt.id}
                 onClick={() => setSelectedFilter(opt.id)}
-                className={`px-3.5 py-1.5 rounded text-xs sm:text-sm font-sans font-medium cursor-pointer transition-all ${
+                className={`relative px-3.5 py-1.5 rounded text-xs sm:text-sm font-sans font-medium cursor-pointer transition-colors ${
                   isActive
-                    ? 'bg-[var(--text-primary)] text-white border border-[var(--text-primary)] font-semibold shadow-xs'
-                    : 'bg-[var(--bg-subtle)] text-[var(--text-secondary)] border border-[var(--border-medium)] hover:text-[var(--text-primary)]'
+                    ? 'text-white font-semibold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
-                {opt.label}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeFilterPill"
+                    className="absolute inset-0 bg-[var(--text-primary)] rounded shadow-xs -z-10"
+                    transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                  />
+                )}
+                {!isActive && (
+                  <div className="absolute inset-0 bg-[var(--bg-subtle)] border border-[var(--border-medium)] rounded -z-10" />
+                )}
+                <span>{opt.label}</span>
               </button>
             );
           })}
@@ -266,9 +277,10 @@ export const SkillsSection: React.FC = () => {
                           const IconComp = meta.icon;
 
                           return (
-                            <div
+                            <motion.div
                               key={skillName}
-                              className="flex items-center gap-2.5 px-3 py-2 rounded-md bg-[var(--bg-subtle)] border border-[var(--border-light)] hover:border-[var(--accent-vermilion)]/40 hover:bg-white transition-all duration-150 h-11 min-w-0 shadow-2xs group/tile"
+                              whileHover={{ y: -4, transition: { type: 'spring', stiffness: 300 } }}
+                              className="flex items-center gap-2.5 px-3 py-2 rounded-md bg-[var(--bg-subtle)] border border-[var(--border-light)] hover:border-[var(--accent-vermilion)]/40 hover:bg-white transition-colors duration-150 h-11 min-w-0 shadow-2xs group/tile cursor-pointer"
                               title={skillName}
                             >
                               <span
@@ -280,7 +292,7 @@ export const SkillsSection: React.FC = () => {
                               <span className="text-xs font-semibold text-[var(--text-primary)] font-sans truncate">
                                 {meta.name}
                               </span>
-                            </div>
+                            </motion.div>
                           );
                         })}
                       </div>
@@ -296,13 +308,14 @@ export const SkillsSection: React.FC = () => {
                     >
                       <div className="flex flex-wrap gap-1.5">
                         {category.skills.map((skill) => (
-                          <span
+                          <motion.span
                             key={skill}
-                            className="mono-tag text-xs px-2.5 py-1 bg-[var(--bg-subtle)] border-[var(--border-medium)] text-[var(--text-primary)] font-medium inline-flex items-center gap-1.5 transition-colors"
+                            whileHover={{ y: -3, transition: { type: 'spring', stiffness: 300 } }}
+                            className="mono-tag text-xs px-2.5 py-1 bg-[var(--bg-subtle)] border-[var(--border-medium)] text-[var(--text-primary)] font-medium inline-flex items-center gap-1.5 transition-colors cursor-pointer"
                           >
                             <span className="w-1 h-1 rounded-full bg-[var(--accent-vermilion)]" />
                             {skill}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
                     </div>

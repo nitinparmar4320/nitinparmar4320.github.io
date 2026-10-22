@@ -1,7 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { SectionHeader } from '../common/SectionHeader';
+import { ScrollScrubQuote } from '@/components/ui/ScrollScrubQuote';
 import {
   LuMapPin as MapPin,
   LuClock as Clock,
@@ -48,10 +50,8 @@ export const AboutSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(320px,1.25fr)_minmax(320px,1fr)] gap-12 lg:gap-16 items-start">
           {/* Left Column: Editorial Manifesto & Content */}
           <div>
-            {/* Large Editorial Pull Quote */}
-            <blockquote className="font-display text-2xl sm:text-3xl leading-snug text-[var(--text-primary)] italic font-normal mb-8 border-l-4 border-l-[var(--accent-vermilion)] pl-6">
-              “I enjoy solving practical engineering problems, organizing complex functionality into maintainable modules, and building interfaces that make sophisticated systems easier to use.”
-            </blockquote>
+            {/* Kinetic Text Reading Reveal Pull Quote */}
+            <ScrollScrubQuote />
 
             {/* Narrative Body Copy */}
             <div className="flex flex-col gap-5 text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] mb-10">
@@ -65,7 +65,10 @@ export const AboutSection: React.FC = () => {
 
             {/* Core Architectural Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-[var(--border-medium)] pt-6">
-              <div>
+              <motion.div
+                whileHover={{ y: -3, transition: { type: 'spring', stiffness: 350, damping: 20 } }}
+                className="p-3.5 rounded-lg border border-transparent hover:border-[var(--border-light)] hover:bg-[var(--bg-subtle)] transition-colors relative"
+              >
                 <span className="mono-label text-[var(--accent-vermilion)] mb-1.5 flex items-center gap-1.5 font-semibold">
                   <Code2 size={13} />
                   01. FRONTEND CRAFT
@@ -73,9 +76,12 @@ export const AboutSection: React.FC = () => {
                 <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
                   Deterministic client state, strict TypeScript interfaces, responsive layouts, and accessible interaction states.
                 </p>
-              </div>
+              </motion.div>
 
-              <div>
+              <motion.div
+                whileHover={{ y: -3, transition: { type: 'spring', stiffness: 350, damping: 20 } }}
+                className="p-3.5 rounded-lg border border-transparent hover:border-[var(--border-light)] hover:bg-[var(--bg-subtle)] transition-colors relative"
+              >
                 <span className="mono-label text-[var(--accent-blue)] mb-1.5 flex items-center gap-1.5 font-semibold">
                   <Server size={13} />
                   02. BACKEND RESILIENCE
@@ -83,7 +89,7 @@ export const AboutSection: React.FC = () => {
                 <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
                   Decoupled microservice boundaries, ACID-compliant schema design, structured logging, and verified API contracts.
                 </p>
-              </div>
+              </motion.div>
             </div>
           </div>
 

@@ -58,7 +58,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const nextProject = projectIndex < projectsData.length - 1 ? projectsData[projectIndex + 1] : null;
 
   return (
-    <div className="portfolio-app min-h-screen flex flex-col bg-[var(--bg-primary)]">
+    <div className="portfolio-app min-h-screen flex flex-col bg-transparent">
       {/* Top Header */}
       <Header activeSection="projects" />
 

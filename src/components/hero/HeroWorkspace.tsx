@@ -29,6 +29,8 @@ import {
   SiGithub,
 } from 'react-icons/si';
 import { TbBrandLinkedin } from 'react-icons/tb';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { MagneticButton } from '@/components/ui/MagneticButton';
 
 interface TechPill {
   name: string;
@@ -98,10 +100,14 @@ export const HeroWorkspace: React.FC = () => {
   const [activePillIndex, setActivePillIndex] = useState<number>(0);
   const [lightingMood, setLightingMood] = useState<'dual' | 'warm' | 'electric'>('dual');
 
-  // 3D Tilt state on portrait
-  const [tilt, setTilt] = useState<{ x: number; y: number; shineX: number; shineY: number }>({
-    x: 0,
-    y: 0,
+  // Motion 3D Tilt springs for desktop cursor tracking
+  const mouseNormX = useMotionValue(0);
+  const mouseNormY = useMotionValue(0);
+  const tiltSpringConfig = { stiffness: 260, damping: 22, mass: 0.15 };
+  const rotateX = useSpring(useTransform(mouseNormY, [-1, 1], [6, -6]), tiltSpringConfig);
+  const rotateY = useSpring(useTransform(mouseNormX, [-1, 1], [-6, 6]), tiltSpringConfig);
+
+  const [tiltShine, setTiltShine] = useState<{ shineX: number; shineY: number }>({
     shineX: 50,
     shineY: 50,
   });
@@ -138,7 +144,7 @@ export const HeroWorkspace: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // 3D Tilt calculation on mouse move
+  // 3D Tilt calculation on mouse move via Motion
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
@@ -149,15 +155,14 @@ export const HeroWorkspace: React.FC = () => {
     const normalizedX = (clientX / rect.width) * 2 - 1;
     const normalizedY = (clientY / rect.height) * 2 - 1;
 
-    // Max tilt angles: 6 deg
-    const rotateY = Number((normalizedX * 6).toFixed(2));
-    const rotateX = Number((-normalizedY * 6).toFixed(2));
+    mouseNormX.set(normalizedX);
+    mouseNormY.set(normalizedY);
 
     const shineX = Math.round((clientX / rect.width) * 100);
     const shineY = Math.round((clientY / rect.height) * 100);
 
-    setTilt({ x: rotateX, y: rotateY, shineX, shineY });
-  }, []);
+    setTiltShine({ shineX, shineY });
+  }, [mouseNormX, mouseNormY]);
 
   const handleMouseEnter = useCallback(() => {
     setIsCardHovered(true);
@@ -165,8 +170,10 @@ export const HeroWorkspace: React.FC = () => {
 
   const handleMouseLeave = useCallback(() => {
     setIsCardHovered(false);
-    setTilt({ x: 0, y: 0, shineX: 50, shineY: 50 });
-  }, []);
+    mouseNormX.set(0);
+    mouseNormY.set(0);
+    setTiltShine({ shineX: 50, shineY: 50 });
+  }, [mouseNormX, mouseNormY]);
 
   // Quick email copy
   const handleCopyEmail = () => {
@@ -181,27 +188,23 @@ export const HeroWorkspace: React.FC = () => {
     <section
       id="hero"
       aria-label="Studio Workspace — Nitin Parmar"
-      className="relative pt-24 sm:pt-28 md:pt-32 pb-16 md:pb-24 border-b border-[var(--border-medium)] overflow-hidden bg-[var(--bg-primary)]"
+      className="relative pt-24 sm:pt-28 md:pt-32 pb-16 md:pb-24 border-b border-[var(--border-medium)] overflow-hidden bg-transparent"
     >
-      {/* Background Architectural Grid Accent */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-40"
-        style={{
-          backgroundImage:
-            'radial-gradient(var(--border-strong) 1px, transparent 1px), radial-gradient(var(--border-strong) 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-          backgroundPosition: '0 0, 20px 20px',
-          maskImage: 'radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at 50% 30%, black 40%, transparent 80%)',
-        }}
-        aria-hidden="true"
-      />
-
       <div className="container relative z-10">
         {/* ================= 1. EDITORIAL METADATA BAR ================= */}
-        <div className="flex items-center justify-between border-b border-[var(--border-medium)] pb-3 mb-8 md:mb-12 flex-wrap gap-3">
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, staggerChildren: 0.08 }}
+          className="flex items-center justify-between border-b border-[var(--border-medium)] pb-3 mb-8 md:mb-12 flex-wrap gap-3"
+        >
           {/* Identity & Role */}
-          <div className="flex items-center gap-3 sm:gap-4 flex-wrap">
+          <motion.div
+            initial={{ opacity: 0, x: -8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 sm:gap-4 flex-wrap"
+          >
             <span className="mono-label text-xs sm:text-sm">
               <span className="text-[var(--accent-vermilion)] font-semibold">[00 // IDENTITY]</span>{' '}
               <span className="text-[var(--text-primary)] font-semibold tracking-wider">NITIN PARMAR</span>
@@ -210,10 +213,15 @@ export const HeroWorkspace: React.FC = () => {
             <span className="mono-label text-[var(--text-secondary)] text-xs sm:text-sm">
               FULL STACK SOFTWARE DEVELOPER
             </span>
-          </div>
+          </motion.div>
 
           {/* Location, Live Clock & Availability */}
-          <div className="flex items-center gap-3 sm:gap-5 flex-wrap">
+          <motion.div
+            initial={{ opacity: 0, x: 8 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-3 sm:gap-5 flex-wrap"
+          >
             {/* Live Status Pill with Radar Ping */}
             <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[rgba(46,125,50,0.08)] border border-[rgba(46,125,50,0.28)]">
               <span className="relative flex h-2 w-2">
@@ -236,8 +244,8 @@ export const HeroWorkspace: React.FC = () => {
               <MapPin size={12} />
               <span>23.0225° N, 72.5714° E</span>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* ================= 2. MAIN ASYMMETRIC GRID ================= */}
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(330px,1.15fr)_minmax(320px,1fr)] gap-10 lg:gap-14 xl:gap-16 items-center">
@@ -253,13 +261,18 @@ export const HeroWorkspace: React.FC = () => {
             </div>
 
             {/* Editorial Master Heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.65rem] leading-[1.08] tracking-[-0.025em] font-medium text-[var(--text-primary)] mb-5">
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1, type: 'spring', stiffness: 120, damping: 20 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-[3.65rem] leading-[1.08] tracking-[-0.025em] font-medium text-[var(--text-primary)] mb-5"
+            >
               Building thoughtful web applications,{' '}
               <span className="font-display italic font-normal text-[var(--accent-vermilion)]">
                 from interface
               </span>{' '}
               to infrastructure.
-            </h1>
+            </motion.h1>
 
             {/* Narrative Value Proposition */}
             <p className="text-base sm:text-lg leading-relaxed text-[var(--text-secondary)] mb-7 max-w-xl">
@@ -271,89 +284,117 @@ export const HeroWorkspace: React.FC = () => {
               architectures in Ahmedabad, India.
             </p>
 
-            {/* Experience & Quality Metric Cards */}
+            {/* Experience & Quality Metric Cards with Spring Scale */}
             <div className="grid grid-cols-3 gap-3 sm:gap-4 py-4 border-y border-[var(--border-medium)] mb-7">
-              <div className="p-3 bg-[var(--bg-surface)] border border-[var(--border-light)] rounded-md shadow-2xs">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 160, damping: 18, delay: 0.05 }}
+                className="p-3 bg-[var(--bg-surface)] border border-[var(--border-light)] rounded-md shadow-2xs"
+              >
                 <div className="flex items-baseline gap-1 font-display text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] leading-none">
                   3+ <span className="text-xs font-mono text-[var(--accent-vermilion)] font-medium">YRS</span>
                 </div>
                 <div className="mono-label text-[0.68rem] mt-1.5 text-[var(--text-secondary)]">
                   Production Exp
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="p-3 bg-[var(--bg-surface)] border border-[var(--border-light)] rounded-md shadow-2xs">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 160, damping: 18, delay: 0.12 }}
+                className="p-3 bg-[var(--bg-surface)] border border-[var(--border-light)] rounded-md shadow-2xs"
+              >
                 <div className="flex items-baseline gap-1 font-display text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] leading-none">
                   15+ <span className="text-xs font-mono text-[var(--accent-blue)] font-medium">APPS</span>
                 </div>
                 <div className="mono-label text-[0.68rem] mt-1.5 text-[var(--text-secondary)]">
                   Shipped Systems
                 </div>
-              </div>
+              </motion.div>
 
-              <div className="p-3 bg-[var(--bg-surface)] border border-[var(--border-light)] rounded-md shadow-2xs">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 160, damping: 18, delay: 0.19 }}
+                className="p-3 bg-[var(--bg-surface)] border border-[var(--border-light)] rounded-md shadow-2xs"
+              >
                 <div className="flex items-baseline gap-1 font-display text-2xl sm:text-3xl font-semibold text-[var(--text-primary)] leading-none">
                   100% <span className="text-xs font-mono text-[var(--accent-green)] font-medium">MODULAR</span>
                 </div>
                 <div className="mono-label text-[0.68rem] mt-1.5 text-[var(--text-secondary)]">
                   Clean Architecture
                 </div>
-              </div>
+              </motion.div>
             </div>
 
-            {/* Action Buttons & Quick Connect */}
+            {/* Action Buttons & Quick Connect with Magnetic Spring Physics */}
             <div className="flex items-center gap-3 sm:gap-4 flex-wrap mb-7">
-              <a href="#projects" className="btn btn-primary shadow-sm">
-                <span>Explore Work</span>
-                <ArrowDown size={15} className="btn-icon-arrow" />
-              </a>
+              <MagneticButton distance={0.3}>
+                <a href="#projects" className="btn btn-primary shadow-sm">
+                  <span>Explore Work</span>
+                  <ArrowDown size={15} className="btn-icon-arrow" />
+                </a>
+              </MagneticButton>
 
-              <a href="#contact" className="btn btn-secondary">
-                <span>Get In Touch</span>
-                <ArrowUpRight size={15} className="btn-icon-arrow" />
-              </a>
+              <MagneticButton distance={0.3}>
+                <a href="#contact" className="btn btn-secondary">
+                  <span>Get In Touch</span>
+                  <ArrowUpRight size={15} className="btn-icon-arrow" />
+                </a>
+              </MagneticButton>
 
               {/* Quick Copy Email Button */}
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="group inline-flex items-center gap-2 px-3.5 py-2.5 rounded border border-[var(--border-medium)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-vermilion)] hover:text-[var(--accent-vermilion)] text-xs font-mono transition-all duration-200 cursor-pointer"
-                title="Click to copy email address"
-                aria-label="Copy Nitin's email to clipboard"
-              >
-                {copiedEmail ? (
-                  <>
-                    <Check size={13} className="text-[var(--accent-green)]" />
-                    <span className="text-[var(--accent-green)] font-semibold">COPIED!</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy size={13} className="text-[var(--text-tertiary)] group-hover:text-[var(--accent-vermilion)] transition-colors" />
-                    <span>COPY EMAIL</span>
-                  </>
-                )}
-              </button>
+              <MagneticButton distance={0.25}>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="group inline-flex items-center gap-2 px-3.5 py-2.5 rounded border border-[var(--border-medium)] bg-[var(--bg-surface)] text-[var(--text-primary)] hover:border-[var(--accent-vermilion)] hover:text-[var(--accent-vermilion)] text-xs font-mono transition-all duration-200 cursor-pointer"
+                  title="Click to copy email address"
+                  aria-label="Copy Nitin's email to clipboard"
+                >
+                  {copiedEmail ? (
+                    <>
+                      <Check size={13} className="text-[var(--accent-green)]" />
+                      <span className="text-[var(--accent-green)] font-semibold">COPIED!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={13} className="text-[var(--text-tertiary)] group-hover:text-[var(--accent-vermilion)] transition-colors" />
+                      <span>COPY EMAIL</span>
+                    </>
+                  )}
+                </button>
+              </MagneticButton>
 
               {/* Direct Social Links */}
               <div className="flex items-center gap-1.5 ml-auto sm:ml-0">
-                <a
-                  href="https://www.linkedin.com/in/nitinparmar4320"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded border border-[var(--border-light)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[#0077B5] hover:border-[#0077B5] transition-colors"
-                  aria-label="LinkedIn profile"
-                >
-                  <TbBrandLinkedin size={16} />
-                </a>
-                <a
-                  href="https://github.com/nitinparmar4320"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded border border-[var(--border-light)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-colors"
-                  aria-label="GitHub profile"
-                >
-                  <SiGithub size={16} />
-                </a>
+                <MagneticButton distance={0.35}>
+                  <a
+                    href="https://www.linkedin.com/in/nitinparmar4320"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded border border-[var(--border-light)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[#0077B5] hover:border-[#0077B5] transition-colors inline-flex"
+                    aria-label="LinkedIn profile"
+                  >
+                    <TbBrandLinkedin size={16} />
+                  </a>
+                </MagneticButton>
+                <MagneticButton distance={0.35}>
+                  <a
+                    href="https://github.com/nitinparmar4320"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded border border-[var(--border-light)] bg-[var(--bg-surface)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--text-primary)] transition-colors inline-flex"
+                    aria-label="GitHub profile"
+                  >
+                    <SiGithub size={16} />
+                  </a>
+                </MagneticButton>
               </div>
             </div>
 
@@ -444,19 +485,19 @@ export const HeroWorkspace: React.FC = () => {
               />
             </div>
 
-            {/* Interactive 3D Card Container */}
-            <div
+            {/* Interactive 3D Card Container with Motion Springs */}
+            <motion.div
               ref={cardRef}
               onMouseMove={handleMouseMove}
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
-              className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] xl:max-w-[470px] select-none transition-transform duration-300 ease-out"
+              className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[440px] xl:max-w-[470px] select-none will-change-transform"
               style={{
-                perspective: '1200px',
-                transform: `perspective(1200px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale3d(${
-                  isCardHovered ? 1.015 : 1
-                }, ${isCardHovered ? 1.015 : 1}, 1)`,
+                perspective: 1200,
+                rotateX,
+                rotateY,
               }}
+              whileHover={{ scale: 1.015, transition: { duration: 0.25 } }}
             >
               {/* Outer Architectural Blueprint Frame */}
               <div className="relative rounded-2xl p-2.5 sm:p-3 bg-[var(--bg-surface)] border border-[var(--border-medium)] shadow-[0_16px_40px_rgba(32,33,31,0.08)] backdrop-blur-sm">
@@ -543,7 +584,7 @@ export const HeroWorkspace: React.FC = () => {
                     className="absolute inset-0 pointer-events-none transition-opacity duration-300"
                     style={{
                       opacity: isCardHovered ? 0.35 : 0,
-                      background: `radial-gradient(circle 260px at ${tilt.shineX}% ${tilt.shineY}%, rgba(255,255,255,0.4) 0%, transparent 75%)`,
+                      background: `radial-gradient(circle 260px at ${tiltShine.shineX}% ${tiltShine.shineY}%, rgba(255,255,255,0.4) 0%, transparent 75%)`,
                     }}
                     aria-hidden="true"
                   />
@@ -623,7 +664,7 @@ export const HeroWorkspace: React.FC = () => {
                 </div>
               </div>
 
-            </div>
+            </motion.div>
 
           </div>
 
@@ -685,33 +726,72 @@ export const HeroWorkspace: React.FC = () => {
             {/* Drawer Content Body */}
             <div className="p-4 sm:p-5 font-mono text-xs sm:text-[0.82rem] leading-relaxed overflow-x-auto">
               {activeTab === 'code' && (
-                <pre className="text-[var(--text-secondary)]">
-                  <code>
-                    <span className="text-[var(--accent-blue)]">import</span> &#123;{' '}
-                    <span className="text-[var(--accent-vermilion)]">Developer</span>,{' '}
-                    <span className="text-[var(--accent-vermilion)]">Architecture</span> &#125;{' '}
-                    <span className="text-[var(--accent-blue)]">from</span>{' '}
-                    <span className="text-[var(--accent-green)]">'@/nitin/portfolio'</span>;{'\n\n'}
-                    <span className="text-[var(--accent-blue)]">export const</span>{' '}
-                    <span className="text-[var(--text-primary)] font-semibold">nitinParmar</span>:{' '}
-                    <span className="text-[var(--accent-vermilion)]">Developer</span> = &#123;{'\n'}
-                    {'  '}name: <span className="text-[var(--accent-green)]">'Nitin Parmar'</span>,{'\n'}
-                    {'  '}role: <span className="text-[var(--accent-green)]">'Full Stack Software Developer'</span>,{'\n'}
-                    {'  '}experienceYears: <span className="text-[var(--accent-amber)] font-bold">3.2</span>,{'\n'}
-                    {'  '}location: <span className="text-[var(--accent-green)]">'Ahmedabad, Gujarat, India'</span>,{'\n'}
-                    {'  '}coreStack: [
-                    <span className="text-[var(--accent-green)]">'Next.js'</span>,{' '}
-                    <span className="text-[var(--accent-green)]">'React.js'</span>,{' '}
-                    <span className="text-[var(--accent-green)]">'TypeScript'</span>,{' '}
-                    <span className="text-[var(--accent-green)]">'Node.js'</span>,{' '}
-                    <span className="text-[var(--accent-green)]">'PostgreSQL'</span>
-                    ],{'\n'}
-                    {'  '}architecturePhilosophy: <span className="text-[var(--accent-green)]">'Modularity, predictable state contracts, and seamless UX'</span>,{'\n'}
-                    {'  '}contact: <span className="text-[var(--accent-green)]">'nitinparmar4320@gmail.com'</span>,{'\n'}
-                    {'  '}isAvailableForNewProjects: <span className="text-[var(--accent-green)] font-bold">true</span>,{'\n'}
-                    &#125;;
-                  </code>
-                </pre>
+                <motion.div
+                  key="code-tab"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    show: {
+                      opacity: 1,
+                      transition: {
+                        staggerChildren: 0.05,
+                      },
+                    },
+                  }}
+                  initial="hidden"
+                  animate="show"
+                  className="font-mono text-xs sm:text-[0.82rem] leading-relaxed text-[var(--text-secondary)]"
+                >
+                  <pre>
+                    <code>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        <span className="text-[var(--accent-blue)]">import</span> &#123;{' '}
+                        <span className="text-[var(--accent-vermilion)]">Developer</span>,{' '}
+                        <span className="text-[var(--accent-vermilion)]">Architecture</span> &#125;{' '}
+                        <span className="text-[var(--accent-blue)]">from</span>{' '}
+                        <span className="text-[var(--accent-green)]">'@/nitin/portfolio'</span>;
+                      </motion.div>
+                      <div className="h-2" />
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        <span className="text-[var(--accent-blue)]">export const</span>{' '}
+                        <span className="text-[var(--text-primary)] font-semibold">nitinParmar</span>:{' '}
+                        <span className="text-[var(--accent-vermilion)]">Developer</span> = &#123;
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}name: <span className="text-[var(--accent-green)]">'Nitin Parmar'</span>,
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}role: <span className="text-[var(--accent-green)]">'Full Stack Software Developer'</span>,
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}experienceYears: <span className="text-[var(--accent-amber)] font-bold">3.2</span>,
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}location: <span className="text-[var(--accent-green)]">'Ahmedabad, Gujarat, India'</span>,
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}coreStack: [
+                        <span className="text-[var(--accent-green)]">'Next.js'</span>,{' '}
+                        <span className="text-[var(--accent-green)]">'React.js'</span>,{' '}
+                        <span className="text-[var(--accent-green)]">'TypeScript'</span>,{' '}
+                        <span className="text-[var(--accent-green)]">'Node.js'</span>,{' '}
+                        <span className="text-[var(--accent-green)]">'PostgreSQL'</span>
+                        ],
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}architecturePhilosophy: <span className="text-[var(--accent-green)]">'Modularity, predictable state contracts, and seamless UX'</span>,
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}contact: <span className="text-[var(--accent-green)]">'nitinparmar4320@gmail.com'</span>,
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        {'  '}isAvailableForNewProjects: <span className="text-[var(--accent-green)] font-bold">true</span>,
+                      </motion.div>
+                      <motion.div variants={{ hidden: { opacity: 0, x: -6 }, show: { opacity: 1, x: 0 } }}>
+                        &#125;;
+                      </motion.div>
+                    </code>
+                  </pre>
+                </motion.div>
               )}
 
               {activeTab === 'profile' && (

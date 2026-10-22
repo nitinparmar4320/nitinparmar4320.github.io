@@ -2,6 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { motion } from 'motion/react';
+import { MagneticButton } from '@/components/ui/MagneticButton';
 import type { Project } from '@/types';
 import {
   LuArrowRight as ArrowRight,
@@ -304,12 +306,16 @@ export const HomeProjectCard: React.FC<HomeProjectCardProps> = ({ project }) => 
             ))}
           </ul>
 
-          {/* Primary Technologies */}
+          {/* Primary Technologies with Motion Hover */}
           <div className="flex flex-wrap items-center gap-1.5">
             {project.technologies.slice(0, 4).map((tech) => (
-              <span key={tech} className="mono-tag text-[0.65rem] sm:text-[0.68rem] py-0.5 px-2">
+              <motion.span
+                key={tech}
+                whileHover={{ y: -2, transition: { type: 'spring', stiffness: 350 } }}
+                className="mono-tag text-[0.65rem] sm:text-[0.68rem] py-0.5 px-2 cursor-pointer transition-colors"
+              >
                 {tech}
-              </span>
+              </motion.span>
             ))}
             {project.technologies.length > 4 && (
               <span className="mono-label text-[0.62rem] sm:text-[0.65rem] text-[var(--text-tertiary)] ml-1">
@@ -319,10 +325,14 @@ export const HomeProjectCard: React.FC<HomeProjectCardProps> = ({ project }) => 
           </div>
         </div>
 
-        {/* Right Column: Visual Preview Graphic Teaser */}
-        <div className="hidden lg:block h-full min-h-[200px]">
+        {/* Right Column: Visual Preview Graphic Teaser with Interactive Hover Scale */}
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          transition={{ type: 'spring', stiffness: 350, damping: 22 }}
+          className="hidden lg:block h-full min-h-[200px] cursor-pointer"
+        >
           {renderVisualTeaser()}
-        </div>
+        </motion.div>
       </div>
 
       {/* ================= BOTTOM ACTION FOOTER ================= */}
@@ -337,13 +347,15 @@ export const HomeProjectCard: React.FC<HomeProjectCardProps> = ({ project }) => 
         </div>
 
         {/* PROMINENT FULL DETAILS ACTION BUTTON */}
-        <Link
-          href={`/projects/${project.id}`}
-          className="btn btn-primary text-xs sm:text-sm py-2 px-4 rounded gap-2 group/btn"
-        >
-          <span>Full Details & Architecture</span>
-          <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
-        </Link>
+        <MagneticButton distance={0.25}>
+          <Link
+            href={`/projects/${project.id}`}
+            className="btn btn-primary text-xs sm:text-sm py-2 px-4 rounded gap-2 group/btn inline-flex items-center"
+          >
+            <span>Full Details & Architecture</span>
+            <ArrowRight size={14} className="group-hover/btn:translate-x-1 transition-transform" />
+          </Link>
+        </MagneticButton>
       </div>
     </article>
   );

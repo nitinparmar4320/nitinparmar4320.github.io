@@ -6,7 +6,7 @@ import { Header } from '@/components/common/Header';
 // import { Hero } from '@/components/hero/Hero';
 // import { HeroShowcase } from '@/components/hero/HeroShowcase';
 import { HeroWorkspace } from '@/components/hero/HeroWorkspace';
-import { ProjectsSection } from '@/components/projects/ProjectsSection';
+import { ProjectsSlider } from '@/components/sections/ProjectsSlider';
 import { AboutSection } from '@/components/about/AboutSection';
 import { ExperienceSection } from '@/components/experience/ExperienceSection';
 import { SkillsSection } from '@/components/skills/SkillsSection';
@@ -50,7 +50,7 @@ export default function Home() {
   };
 
   return (
-    <div className="portfolio-app min-h-screen flex flex-col bg-[var(--bg-primary)]">
+    <div className="portfolio-app min-h-screen flex flex-col bg-transparent">
       {/* Sticky Top Navigation */}
       <Header activeSection={activeSection} />
 
@@ -59,8 +59,8 @@ export default function Home() {
         {/* Section 00: Modern Developer Studio Workspace Hero */}
         <HeroWorkspace />
 
-        {/* Section 01: Selected Work / Projects */}
-        <ProjectsSection />
+        {/* Section 01: Selected Work / Projects (Motion-Driven Horizontal Scrubber Track) */}
+        <ProjectsSlider />
 
         {/* Section 02: About Me */}
         <AboutSection />

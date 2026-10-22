@@ -29,7 +29,7 @@ export default function ProjectsPage() {
     : projectsData.filter((p) => p.layoutType === selectedFilter);
 
   return (
-    <div className="portfolio-app min-h-screen flex flex-col bg-[var(--bg-primary)]">
+    <div className="portfolio-app min-h-screen flex flex-col bg-transparent">
       {/* Top Header */}
       <Header activeSection="projects" />
 
