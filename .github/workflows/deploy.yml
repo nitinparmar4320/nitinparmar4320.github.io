@@ -2,7 +2,8 @@ name: Deploy Next.js site to Pages
 
 on:
   push:
-    branches: ["main"]
+    # branches: ["main"]
+    branches: ["animation_gsap_scroll_trigger"]
   workflow_dispatch:
 
 permissions:
